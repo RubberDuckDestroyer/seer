@@ -8,6 +8,7 @@
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "mocha \"./tests\" --exit",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
@@ -51,7 +52,7 @@
         "error",
         "never"
       ],
-      "no-unused-vars":"warn",
+      "no-unused-vars": "warn",
       "no-var": "off",
       "one-var": "off",
       "no-console": "off",
@@ -64,14 +65,17 @@
       "react/no-unescaped-entities": "off",
       "import/prefer-default-export": "off",
       "prefer-destructuring": "off",
-      "keyword-spacing": "off"
+      "keyword-spacing": "off",
+      "indent": "off"
     }
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "concurrently": "^5.0.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.1.2",
     "nodemon": "^2.0.1"
   },
   "bugs": {
