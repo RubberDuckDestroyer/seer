@@ -1,17 +1,18 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logout } from "../../actions/auth";
 import { Navbar, Nav } from "react-bootstrap";
 
-const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+import { logout } from "../../actions/auth";
+
+const AppNavbar = ({ auth: { isAuthenticated, loading }, logout: onLogout }) => {
   const authLinks = (
     <Nav className="mr-auto">
       <Nav.Link href="/dashboard">
         <i className="fas fa-user" />
         Dashboard
       </Nav.Link>
-      <Nav.Link href="#!" onClick={logout}>
+      <Nav.Link href="#!" onClick={onLogout}>
         <i className="fas fa-sign-out-alt" />
         Logout
       </Nav.Link>

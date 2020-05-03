@@ -21,6 +21,7 @@ const PrivateRoute = ({
 );
 
 PrivateRoute.propTypes = {
+  component: PropTypes.instanceOf(React.Component),
   auth: PropTypes.object.isRequired
 };
 

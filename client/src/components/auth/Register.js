@@ -1,12 +1,14 @@
 import React, { Fragment, useState } from "react";
+import PropTypes from "prop-types";
+import {
+  Form, Button, Row, Col
+} from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
-import PropTypes from "prop-types";
-import { Form, Button, Row, Col } from "react-bootstrap";
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert: onSetAlert, register: onRegister, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,7 +16,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password2: ""
   });
 
-  const { name, email, password, password2 } = formData;
+  const {
+    name, email, password, password2
+  } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,9 +26,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert("Passwords do not match", "danger");
-    } else {
-      register({ name, email, password });
+      onSetAlert("Passwords do not match", "danger");
+    }
+    else {
+      onRegister({ name, email, password });
     }
   };
 
@@ -97,7 +102,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </Col>
         </Form.Group>
         <Button variant="primary" type="submit">
-          Register
+          onRegister
         </Button>
       </Form>
       <p>
