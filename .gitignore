@@ -2,3 +2,4 @@ node_modules/
 client/node_modules
 build
 .env
+.DS_Store

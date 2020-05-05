@@ -1,0 +1,39 @@
+{
+    "extends": [
+        "airbnb-base",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "plugins": [
+        "react"
+    ],
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "rules": {
+        "brace-style": [
+            "error",
+            "stroustrup"
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "no-unused-vars": "warn",
+        "no-var": "off",
+        "one-var": "off",
+        "no-console": "off",
+        "quotes": "off",
+        "space-before-function-paren": "off",
+        "arrow-parens": "off",
+        "no-confusing-arrow": "off",
+        "implicit-arrow-linebreak": "off",
+        "operator-linebreak": "off",
+        "react/no-unescaped-entities": "off",
+        "import/prefer-default-export": "off",
+        "prefer-destructuring": "off",
+        "keyword-spacing": "off",
+        "indent": "off"
+    }
+}
