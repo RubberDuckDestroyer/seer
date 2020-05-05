@@ -8,6 +8,8 @@
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+
+    "pretest": "eslint --ignore-path .eslintignore .",
     "test": "mocha \"./tests\" --exit",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
@@ -29,45 +31,6 @@
     "mongoose": "^5.8.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "request": "^2.88.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "airbnb-base",
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ],
-    "plugins": [
-      "react"
-    ],
-    "env": {
-      "es6": true,
-      "browser": true
-    },
-    "rules": {
-      "brace-style": [
-        "error",
-        "stroustrup"
-      ],
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "no-unused-vars": "warn",
-      "no-var": "off",
-      "one-var": "off",
-      "no-console": "off",
-      "quotes": "off",
-      "space-before-function-paren": "off",
-      "arrow-parens": "off",
-      "no-confusing-arrow": "off",
-      "implicit-arrow-linebreak": "off",
-      "operator-linebreak": "off",
-      "react/no-unescaped-entities": "off",
-      "import/prefer-default-export": "off",
-      "prefer-destructuring": "off",
-      "keyword-spacing": "off",
-      "indent": "off"
-    }
   },
   "devDependencies": {
     "chai": "^4.2.0",
