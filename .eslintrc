@@ -33,6 +33,7 @@
         "import/prefer-default-export": "off",
         "prefer-destructuring": "off",
         "keyword-spacing": "off",
-        "indent": "off"
+        "indent": "off",
+        "no-plusplus": "off"
     }
 }
