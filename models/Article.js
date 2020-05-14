@@ -1,57 +1,50 @@
 const mongoose = require("mongoose");
 
+const Profile = require("./Profile").model("Profile");
+
 const ArticleSchema = new mongoose.Schema({
     submission: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+        submitter: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: Profile.modelName
+        },
+        bibliography: mongoose.Schema.Types.Mixed,
+        statusType: String,
+        date: {
+            type: Date,
+            default: Date.now
+        },
+        updatedDate: {
+            type: Date,
+            default: Date.now
+        },
+        moderator: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: Profile.modelName
+        },
+        analyst: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: Profile.modelName
+        }
     },
-    credibilityOverride: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: false
-    },
-    question: {
-        type: String,
-        required: false
-    },
-    metric: {
-        type: String,
-        required: false
-    },
-    researchMethod: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    },
-    methodType: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    },
-    methodologyType: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    },
-    benefit: {
-        type: String,
-        required: true
-    },
-    participants: [{
-        type: mongoose.Schema.Types.ObjectId
-    }],
+    credibilityOverride: Number,
+    question: String,
+    metric: String,
+    researchMethodType: String,
+    methodType: String,
+    methodologyType: String,
+    benefit: String,
+    participants: [String],
     context: {
-        type: Object,
-        required: false
+        where: String,
+        when: String,
+        what: String,
+        whom: String,
+        how: String
     },
-    result: {
-        type: String,
-        required: true
-    },
-    confidenceRating: {
-        type: Number,
-        required: false
-    },
-    integrity: {
-        type: String,
-        required: false
-    }
+    result: String,
+    confidenceRating: Number,
+    integrity: String
 });
 
 const Article = mongoose.model("Article", ArticleSchema);
