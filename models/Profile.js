@@ -17,34 +17,22 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    middleName: {
-        type: String,
-        required: false
-    },
+    middleName: String,
     email: {
         type: String,
         required: true
     },
     affiliationType: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     affiliationName: {
         type: String,
         required: true
     },
-    role: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: false
-    },
-    gender: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: false
-    },
-    birthDate: {
-        type: Date,
-        required: false
-    }
+    role: String,
+    gender: String,
+    birthDate: Date
 });
 
 const Profile = mongoose.model("Profile", ProfileSchema);

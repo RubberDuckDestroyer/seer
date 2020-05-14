@@ -3,11 +3,8 @@ const BaseRating = require("./BaseRating");
 
 const CredibilityRatingSchema = new mongoose.Schema({
     ...BaseRating,
-    reason: {
-        type: String,
-        required: false
-    }
+    reason: String
 });
 
-const CredibilityRating = mongoose.model("CredibilityRating", CredibilityRatingSchema);
+const CredibilityRating = mongoose.model("credibilityrating", CredibilityRatingSchema);
 module.exports = CredibilityRating;
