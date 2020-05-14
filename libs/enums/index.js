@@ -13,6 +13,7 @@ const Enums = {
     GenderType,
     MethodologyType,
     MethodType,
+    ParticipantType,
     ResearchMethodType,
     ResourceType,
     RoleType,
