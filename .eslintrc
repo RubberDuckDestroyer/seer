@@ -35,6 +35,7 @@
         "keyword-spacing": "off",
         "indent": "off",
         "no-plusplus": "off",
-        "arrow-body-style": "off"
+        "arrow-body-style": "off",
+        "react/prop-types": "off"
     }
 }

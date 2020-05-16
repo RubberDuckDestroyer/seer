@@ -12,6 +12,9 @@ app.use(express.json({ extended: false }));
 
 // Define Routes
 app.use("/api/backend", require("./routes/api/backend"));
+app.use("/api/article", require("./routes/api/article"));
+
+// TODO: These need to be changed in the future.
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 
