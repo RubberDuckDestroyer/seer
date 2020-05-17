@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const { describe, it } = require("mocha");
 
-const BibtexParser = require("../libs/formats/BibtexParser");
+const BibtexParser = require("../libs/BibtexParser");
 
 describe("Testing BibtexParser functions", () => {
     it("Tests whether Bibtex format string can be parsed", () => {
