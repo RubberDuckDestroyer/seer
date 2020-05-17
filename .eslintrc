@@ -36,6 +36,8 @@
         "indent": "off",
         "no-plusplus": "off",
         "arrow-body-style": "off",
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "linebreak-style": "off",
+        "padded-blocks": "off"
     }
 }

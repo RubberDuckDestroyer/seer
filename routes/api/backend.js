@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 
-const BibtexParser = require("../../libs/formats/BibtexParser");
+const BibtexParser = require("../../libs/BibtexParser");
 
 const Article = require("../../models/Article");
 

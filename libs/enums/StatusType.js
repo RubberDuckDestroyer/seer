@@ -1,7 +1,9 @@
+const Enum = require("./Enum");
+
 const StatusType = {
-    submitted: "Submitted",
-    accepted: "Accepted",
-    rejected: "Rejected",
-    complete: "Completed"
+    submitted: new Enum("Submitted"),
+    accepted: new Enum("Accepted"),
+    rejected: new Enum("Rejected"),
+    complete: new Enum("Completed")
 };
 module.exports = StatusType;
