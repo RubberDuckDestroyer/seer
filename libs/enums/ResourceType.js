@@ -1,5 +1,7 @@
+const Enum = require("./Enum");
+
 const ResourceType = {
-    journal: "Journal",
-    webArticle: "Web article"
+    journal: new Enum("Journal"),
+    webArticle: new Enum("Web article")
 };
 module.exports = ResourceType;

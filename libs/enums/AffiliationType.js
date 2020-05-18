@@ -1,5 +1,7 @@
+const Enum = require("./Enum");
+
 const AffiliationType = {
-    institution: "Institution",
-    organization: "Organization"
+    institution: new Enum("Institution"),
+    organization: new Enum("Organization")
 };
 module.exports = AffiliationType;

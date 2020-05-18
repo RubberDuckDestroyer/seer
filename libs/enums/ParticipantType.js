@@ -1,6 +1,8 @@
+const Enum = require("./Enum");
+
 const ParticipantType = {
-    undergraduate: "Undergraduate students",
-    postgraduate: "Postgraduate students",
-    practitioners: "Practitioners"
+    undergraduate: new Enum("Undergraduate students"),
+    postgraduate: new Enum("Postgraduate students"),
+    practitioners: new Enum("Practitioners")
 };
 module.exports = ParticipantType;
