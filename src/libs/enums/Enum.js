@@ -1,4 +1,4 @@
-class Enum {
+export default class Enum {
 
     constructor(name) {
         this.name = name;
@@ -14,4 +14,3 @@ class Enum {
         return null;
     }
 }
-module.exports = Enum;

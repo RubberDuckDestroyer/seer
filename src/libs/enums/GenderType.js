@@ -1,8 +1,8 @@
-const Enum = require("./Enum");
+import Enum from "./Enum";
 
 const GenderType = {
     male: new Enum("Male"),
     female: new Enum("Female"),
     other: new Enum("Other")
 };
-module.exports = GenderType;
+export default GenderType;

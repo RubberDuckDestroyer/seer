@@ -1,4 +1,4 @@
-const Enum = require("./Enum");
+import Enum from "./Enum";
 
 const MethodologyType = {
     scrum: new Enum("Scrum"),
@@ -20,4 +20,4 @@ const MethodologyType = {
     productDrivenDev: new Enum("Product driven development"),
     agile: new Enum("Agile")
 };
-module.exports = MethodologyType;
+export default MethodologyType;

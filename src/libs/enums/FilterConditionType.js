@@ -1,7 +1,7 @@
-const Enum = require("./Enum");
-const RegexUtils = require("../RegexUtils");
+import Enum from "./Enum";
+import RegexUtils from "../RegexUtils";
 
-class SearchConditionInfo extends Enum {
+export class FilterConditionEnum extends Enum {
 
     constructor({ name, queryTargetBuilder }) {
         super(name);
@@ -16,45 +16,42 @@ class SearchConditionInfo extends Enum {
     }
 }
 
-const SearchConditionType = {
-    isEqualTo: new SearchConditionInfo({
+const FilterConditionType = {
+    isEqualTo: new FilterConditionEnum({
         name: "Is equal to"
     }),
-    isLessThan: new SearchConditionInfo({
+
+    isLessThan: new FilterConditionEnum({
         name: "Is less than",
         queryTargetBuilder: (value) => ({ $lt: value })
     }),
-    isLessThanOrEqual: new SearchConditionInfo({
+    isLessThanOrEqual: new FilterConditionEnum({
         name: "Is less than or equal",
         queryTargetBuilder: (value) => ({ $lte: value })
     }),
-    isMoreThan: new SearchConditionInfo({
+    isMoreThan: new FilterConditionEnum({
         name: "Is more than",
         queryTargetBuilder: (value) => ({ $mt: value })
     }),
-    isMoreThanOrEqual: new SearchConditionInfo({
+    isMoreThanOrEqual: new FilterConditionEnum({
         name: "Is more than or equal",
         queryTargetBuilder: (value) => ({ $mte: value })
     }),
-    contains: new SearchConditionInfo({
+    contains: new FilterConditionEnum({
         name: "Contains",
         queryTargetBuilder: (value) => ({ $regex: RegexUtils.sanitize(value), $options: "i" })
     }),
-    doesNotContain: new SearchConditionInfo({
+    doesNotContain: new FilterConditionEnum({
         name: "Does not contain",
         queryTargetBuilder: (value) => ({ $not: { $regex: RegexUtils.sanitize(value), $options: "i" } })
     }),
-    beginsWith: new SearchConditionInfo({
+    beginsWith: new FilterConditionEnum({
         name: "Begins with",
         queryTargetBuilder: (value) => ({ $regex: `^${RegexUtils.sanitize(value)}`, $options: "i" })
     }),
-    endsWith: new SearchConditionInfo({
+    endsWith: new FilterConditionEnum({
         name: "Ends with",
         queryTargetBuilder: (value) => ({ $regex: `${RegexUtils.sanitize(value)}$`, $options: "i" })
     }),
-
-    findByName() {
-
-    }
 };
-module.exports = SearchConditionType;
+export default FilterConditionType;

@@ -1,4 +1,4 @@
-const Enum = require("./Enum");
+import Enum from "./Enum";
 
 const MethodType = {
     tdd: new Enum("TDD"),
@@ -15,4 +15,4 @@ const MethodType = {
     versionControl: new Enum("Version control"),
     codeSharing: new Enum("Code sharing")
 };
-module.exports = MethodType;
+export default MethodType;
