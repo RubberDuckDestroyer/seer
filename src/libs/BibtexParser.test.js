@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { describe, it } from "mocha";
 
-import BibtexParser from "../libs/BibtexParser";
+import BibtexParser from "./BibtexParser";
 
 describe("Testing BibtexParser functions", () => {
     it("Tests whether Bibtex format string can be parsed", () => {

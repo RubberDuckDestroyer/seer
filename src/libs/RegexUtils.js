@@ -4,4 +4,4 @@ const RegexUtils = {
         return regexString.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&');
     }
 };
-module.exports = RegexUtils;
+export default RegexUtils;
