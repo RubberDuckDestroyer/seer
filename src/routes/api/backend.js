@@ -1,10 +1,10 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
+import express from "express";
+import fs from "fs";
+import path from "path";
 
-const BibtexParser = require("../../libs/BibtexParser");
+import BibtexParser from "../../libs/BibtexParser";
 
-const Article = require("../../models/Article");
+import Article from "../../models/Article";
 
 const router = express.Router();
 
