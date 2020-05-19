@@ -5,7 +5,8 @@ const DateUtils = {
         if (typeof (date) === "string") {
             date = new Date(date);
         }
-        return moment(date).utcOffset("+0000").toDate();
+        const newDate = moment(date).utcOffset("+0000").hour(0).minute(0).second(0);
+        return newDate.toDate();
     }
 };
 export default DateUtils;

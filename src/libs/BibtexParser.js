@@ -9,7 +9,7 @@ const BibtexParser = {
         const result = bibtexParse.entries(content);
         result.forEach(r => {
             if (typeof (r.YEAR) === "string") {
-                r.DATE = DateUtils.toUTC(`${r.YEAR}-${r.MONTH || "01"}-01`);
+                r.DATE = DateUtils.toUTC(`${r.YEAR}-${r.MONTH || "January"}-02`);
             }
         });
         return result;
