@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "npm run build",
     "start": "MODE_ENV=production node ./build/server.js",
-    "server": "nodemon --ignore './client' --exec babel-node src/server.js",
+    "server": "nodemon --ignore './client' --exec babel-node src/server.js --extensions \".ts\",\".js\"",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-all": "npm install && cd client && npm install && cd ../",
@@ -42,6 +42,7 @@
     "@babel/node": "^7.8.7",
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
     "chai": "^4.2.0",
     "concurrently": "^5.0.1",
@@ -49,7 +50,8 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "mocha": "^7.1.2",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "typescript": "^3.9.2"
   },
   "bugs": {
     "url": "https://github.com/RubberDuckDestroyer/SEER/issues"
