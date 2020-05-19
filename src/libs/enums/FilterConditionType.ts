@@ -27,7 +27,6 @@ export class FilterConditionEnum extends Enum {
 
 const FilterConditionType = {
     isEqualTo: new FilterConditionEnum("Is equal to"),
-
     isLessThan: new FilterConditionEnum("Is less than", {
         queryTargetBuilder: (value) => ({ $lt: value })
     }),
