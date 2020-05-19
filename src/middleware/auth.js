@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
 
 module.exports = async (req, res, next) => {
   // Get token from header
@@ -13,7 +12,7 @@ module.exports = async (req, res, next) => {
 
   // Verify token
   try {
-    await jwt.verify(token, config.get("jwtSecret"), (error, decoded) => {
+    await jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
         res.status(401).json({ msg: "Token is not valid" });
       }
