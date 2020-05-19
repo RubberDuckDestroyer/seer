@@ -2,8 +2,8 @@ import express from "express";
 
 import Article from "../../models/Article";
 import QueryFilterBuilder from "../../libs/QueryFilterBuilder";
-import ApiResponse from "../../libs/ApiResponse";
 import DateUtils from "../../libs/DateUtils";
+import { ApiResponse } from "../../libs/api/NetworkHelper.ts";
 
 const router = express.Router();
 
@@ -49,10 +49,13 @@ router.post("/", async (req, res) => {
         // TODO: Get back to $and and $or joining when the PO gives an answer.
         const result = await Article.find(query).sort(sortOption);
 
-        res.json(new ApiResponse(true, result));
+        res.json(new ApiResponse({
+            isSuccess: true,
+            data: result
+        }));
     }
     catch (e) {
-        res.status(401).json(new ApiResponse(false, e.toString()));
+        res.status(401).json(new ApiResponse(e));
     }
 });
 module.exports = router;

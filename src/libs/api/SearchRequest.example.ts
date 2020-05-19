@@ -8,10 +8,10 @@ const createRequest = () => new SearchRequest({
             value: ""
         }
     ],
-    minDate: new Date("2020-05-14T06:49:24.442Z"),
-    maxDate: new Date("2020-05-14T06:49:24.442Z"),
+    minDate: new Date("2001-07-31"),
+    maxDate: new Date("2001-08-01"),
     sort: {
         key: "submission.bibliography.TITLE",
-        order: 1
+        isAscending: true
     }
 })

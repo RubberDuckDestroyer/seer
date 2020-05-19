@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import CounterBloc from "./bloc/CounterBloc.ts";
-import BlocContextValue from "./libs/bloc/BlocContextValue.ts";
+import BlocContextValue from "./local-libs/bloc/BlocContextValue.ts";
 
 const counter = new CounterBloc();
 

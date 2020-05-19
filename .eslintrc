@@ -35,6 +35,7 @@
     "padded-blocks": "off",
     "comma-style": "off",
     "max-classes-per-file": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "newline-per-chained-call": "off"
   }
 }

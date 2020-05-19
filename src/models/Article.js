@@ -10,7 +10,7 @@ const ArticleSchema = new mongoose.Schema({
         },
         bibliography: mongoose.Schema.Types.Mixed,
         statusType: String,
-        date: {
+        submitDate: {
             type: Date,
             default: Date.now
         },
