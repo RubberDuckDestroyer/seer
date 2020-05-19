@@ -1,4 +1,4 @@
-const Enum = require("./Enum");
+import Enum from "./Enum";
 
 const RoleType = {
     admin: new Enum("Administrator"),
@@ -7,4 +7,4 @@ const RoleType = {
     user: new Enum("User"),
     sdmMember: new Enum("SDM member")
 };
-module.exports = RoleType;
+export default RoleType;

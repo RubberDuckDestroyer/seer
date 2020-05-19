@@ -1,4 +1,4 @@
-const Enum = require("./Enum");
+import Enum from "./Enum";
 
 const StatusType = {
     submitted: new Enum("Submitted"),
@@ -6,4 +6,4 @@ const StatusType = {
     rejected: new Enum("Rejected"),
     complete: new Enum("Completed")
 };
-module.exports = StatusType;
+export default StatusType;

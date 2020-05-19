@@ -1,4 +1,4 @@
-const Enum = require("./Enum");
+import Enum from "./Enum";
 
 const ResearchMethodType = {
     caseStudy: new Enum("Case study"),
@@ -7,4 +7,4 @@ const ResearchMethodType = {
     interview: new Enum("Interview"),
     survey: new Enum("Survey")
 };
-module.exports = ResearchMethodType;
+export default ResearchMethodType;

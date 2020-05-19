@@ -1,7 +1,7 @@
-const Enum = require("./Enum");
+import Enum from "./Enum";
 
 const AffiliationType = {
     institution: new Enum("Institution"),
     organization: new Enum("Organization")
 };
-module.exports = AffiliationType;
+export default AffiliationType;

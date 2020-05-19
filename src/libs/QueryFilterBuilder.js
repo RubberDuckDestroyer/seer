@@ -1,10 +1,10 @@
-const Enum = require("./enums/Enum");
-const SearchConditionType = require("./enums/SearchConditionType");
+import Enum from "./enums/Enum";
+import FilterConditionType from "./enums/FilterConditionType.ts";
 
 const QueryFilterBuilder = {
 
     buildForQuery({ condition, value }) {
-        const conditionType = Enum.findByName(SearchConditionType, condition);
+        const conditionType = Enum.findByName(FilterConditionType, condition);
         if (conditionType === null) {
             throw new Error(`Unknown condition type: ${condition}`);
         }
