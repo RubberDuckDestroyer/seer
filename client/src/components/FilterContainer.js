@@ -9,6 +9,10 @@ import {
 } from "@material-ui/core";
 
 import MethodType from "../libs/enums/MethodType";
+import MethodologyType from "../libs/enums/MethodologyType";
+import ParticipantType from "../libs/enums/ParticipantType";
+import ResearchMethodType from "../libs/enums/ResearchMethodType";
+import ResourceType from "../libs/enums/ResourceType";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -24,19 +28,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FilterContainer = ({ style }) => {
+  const textInputCategories = ["author"];
+
   const [category, setCategory] = useState("");
   const [condition, setCondition] = useState("");
   const [value, setValue] = useState("");
 
-  const classes = useStyles();
+  const isTextInput = textInputCategories.includes(category);
 
-  const isTextInput = category === "c";
+  const classes = useStyles();
 
   const onChangeCategory = (e) => {
     setCategory(e.target.value);
-    // this probably doesnt work now, need to provide a nice string somehow
-    // change the drop down list on the right to match the catagory selected
-    // update the right things
+    setValue("0");
   };
   const onChangeCondition = (e) => {
     setCondition(e.target.value);
@@ -44,6 +48,24 @@ const FilterContainer = ({ style }) => {
   const onChangeValue = (e) => {
     setValue(e.target.value);
   };
+
+  // Gets the items for the drop down on the right, based on the left
+  function getFilterArray(filterString) {
+    switch (filterString) {
+      case "semethod":
+        return Object.values(MethodType);
+      case "semethodology":
+        return Object.values(MethodologyType);
+      case "participant":
+        return Object.values(ParticipantType);
+      case "researchmethod":
+        return Object.values(ResearchMethodType);
+      case "resourcetype":
+        return Object.values(ResourceType);
+      default:
+        return [];
+    }
+  }
 
   return (
     <Container
@@ -59,12 +81,12 @@ const FilterContainer = ({ style }) => {
             value={category}
             onChange={onChangeCategory}
           >
-            <MenuItem value={MethodType}>SE Method</MenuItem>
+            <MenuItem value={"semethod"}>SE Method</MenuItem>
             <MenuItem value={"semethodology"}>SE Methodology</MenuItem>
             <MenuItem value={"participant"}>Participants</MenuItem>
             <MenuItem value={"researchmethod"}>Research Method</MenuItem>
-            <MenuItem value={"researchmetric"}>Metric</MenuItem>
-            <MenuItem value={"outcome"}>Outcome</MenuItem>
+            <MenuItem value={"resourcetype"}>Resource</MenuItem>
+            <MenuItem value={"author"}>Author</MenuItem>
           </Select>
         </Grid>
         <Grid item xs={4}>
@@ -88,15 +110,18 @@ const FilterContainer = ({ style }) => {
               helperText={""}
             />
           )}
+
           {!isTextInput && (
             <Select
               className={classes.selectionItem}
               value={value}
               onChange={onChangeValue}
             >
-              <MenuItem value={1}>AAA</MenuItem>
-              <MenuItem value={2}>BBB</MenuItem>
-              <MenuItem value={3}>CCC</MenuItem>
+              {
+                getFilterArray(category).map((item, index) => {
+                  return <MenuItem key={item} value={index}>{item}</MenuItem>
+                })
+              }
             </Select>
           )}
         </Grid>

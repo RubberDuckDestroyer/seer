@@ -11,7 +11,6 @@ const MethodType = {
   burndownChart: "Burndown chart",
   reqPrioritization: "Requirements prioritization",
   versionControl: "Version control",
-  codeSharing: "Code sharing",
-  goodName: "SE Method"
+  codeSharing: "Code sharing"
 };
 module.exports = MethodType;
