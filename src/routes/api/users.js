@@ -1,36 +1,27 @@
 const express = require("express");
+const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("config");
 const { check, validationResult } = require("express-validator");
 
-const auth = require("../../middleware/auth");
 const User = require("../../models/User");
 
 const router = express.Router();
 
-// @route    GET api/auth
-// @desc     Test route
-// @access   Public
-router.get("/", auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
-  }
-  catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-// @route    POST api/auth
-// @desc     Authenticate user & get token
+// @route    POST api/users
+// @desc     Register user
 // @access   Public
 router.post(
   "/",
   [
+    check("name", "Name is required")
+      .not()
+      .isEmpty(),
     check("email", "Please include a valid email").isEmail(),
-    check("password", "Password is required").exists()
+    check(
+      "password",
+      "Please enter a password with 6 or more characters"
+    ).isLength({ min: 6 })
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -39,22 +30,34 @@ router.post(
       return;
     }
 
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
-      const user = await User.findOne({ email });
+      let user = await User.findOne({ email });
 
-      if (!user) {
-        res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+      if (user) {
+        res.status(400).json({ errors: [{ msg: "User already exists" }] });
         return;
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      const avatar = gravatar.url(email, {
+        s: "200",
+        r: "pg",
+        d: "mm"
+      });
 
-      if (!isMatch) {
-        res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
-        return;
-      }
+      user = new User({
+        name,
+        email,
+        avatar,
+        password
+      });
+
+      const salt = await bcrypt.genSalt(10);
+
+      user.password = await bcrypt.hash(password, salt);
+
+      await user.save();
 
       const payload = {
         user: {
@@ -64,7 +67,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        process.env.JWT_SECRET,
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
