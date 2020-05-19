@@ -1,11 +1,20 @@
 import Enum from "./Enum";
 import RegexUtils from "../RegexUtils";
 
+interface IFilterConditionParam {
+    queryTargetBuilder?: (value: any) => any
+}
+
 export class FilterConditionEnum extends Enum {
 
-    constructor({ name, queryTargetBuilder }) {
+    queryTargetBuilder: (value: any) => any;
+
+
+    constructor(name: String, param?: IFilterConditionParam) {
         super(name);
-        this.queryTargetBuilder = queryTargetBuilder;
+        if (param) {
+            this.queryTargetBuilder = param.queryTargetBuilder;
+        }
     }
 
     getQueryTarget(value) {
@@ -17,40 +26,30 @@ export class FilterConditionEnum extends Enum {
 }
 
 const FilterConditionType = {
-    isEqualTo: new FilterConditionEnum({
-        name: "Is equal to"
-    }),
+    isEqualTo: new FilterConditionEnum("Is equal to"),
 
-    isLessThan: new FilterConditionEnum({
-        name: "Is less than",
+    isLessThan: new FilterConditionEnum("Is less than", {
         queryTargetBuilder: (value) => ({ $lt: value })
     }),
-    isLessThanOrEqual: new FilterConditionEnum({
-        name: "Is less than or equal",
+    isLessThanOrEqual: new FilterConditionEnum("Is less than or equal", {
         queryTargetBuilder: (value) => ({ $lte: value })
     }),
-    isMoreThan: new FilterConditionEnum({
-        name: "Is more than",
+    isMoreThan: new FilterConditionEnum("Is more than", {
         queryTargetBuilder: (value) => ({ $mt: value })
     }),
-    isMoreThanOrEqual: new FilterConditionEnum({
-        name: "Is more than or equal",
+    isMoreThanOrEqual: new FilterConditionEnum("Is more than or equal", {
         queryTargetBuilder: (value) => ({ $mte: value })
     }),
-    contains: new FilterConditionEnum({
-        name: "Contains",
+    contains: new FilterConditionEnum("Contains", {
         queryTargetBuilder: (value) => ({ $regex: RegexUtils.sanitize(value), $options: "i" })
     }),
-    doesNotContain: new FilterConditionEnum({
-        name: "Does not contain",
+    doesNotContain: new FilterConditionEnum("Does not contain", {
         queryTargetBuilder: (value) => ({ $not: { $regex: RegexUtils.sanitize(value), $options: "i" } })
     }),
-    beginsWith: new FilterConditionEnum({
-        name: "Begins with",
+    beginsWith: new FilterConditionEnum("Begins with", {
         queryTargetBuilder: (value) => ({ $regex: `^${RegexUtils.sanitize(value)}`, $options: "i" })
     }),
-    endsWith: new FilterConditionEnum({
-        name: "Ends with",
+    endsWith: new FilterConditionEnum("Ends with", {
         queryTargetBuilder: (value) => ({ $regex: `${RegexUtils.sanitize(value)}$`, $options: "i" })
     }),
 };
