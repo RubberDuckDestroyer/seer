@@ -7,19 +7,19 @@ import FilterValueType, { FilterValueEnum } from "./FilterValueType";
 
 interface ICategoryEnumParam {
     dbField: String,
-    dataType: FilterValueEnum,
+    valueType: FilterValueEnum,
     domain?: Enum[]
 }
 class CategoryEnum extends Enum {
 
     dbField: String;
-    dataType: FilterValueEnum;
+    valueType: FilterValueEnum;
     domain: Enum[];
 
     constructor(name: String, param: ICategoryEnumParam) {
         super(name);
         this.dbField = param.dbField;
-        this.dataType = param.dataType;
+        this.valueType = param.valueType;
         this.domain = param.domain || null;
     }
 }
@@ -28,88 +28,88 @@ const FilterCategoryType = {
     // Bibliographic fields
     authors: new CategoryEnum("Authors", {
         dbField: "submission.bibliography.AUTHOR",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     title: new CategoryEnum("Title", {
         dbField: "submission.bibliography.TITLE",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     journal: new CategoryEnum("Journal", {
         dbField: "submission.bibliography.JOURNAL",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     publicationYear: new CategoryEnum("Publication year", {
         dbField: "submission.bibliography.YEAR",
-        dataType: FilterValueType.numberInput
+        valueType: FilterValueType.numberInput
     }),
     publicationMonth: new CategoryEnum("Publication month", {
         dbField: "submission.bibliography.MONTH",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     publicationType: new CategoryEnum("Publication type", {
         dbField: "submission.bibliography.type",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
 
     // Article fields
     question: new CategoryEnum("Question", {
         dbField: "question",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     metric: new CategoryEnum("Metric", {
         dbField: "metric",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     researchMethod: new CategoryEnum("Research method", {
         dbField: "researchMethodType",
-        dataType: FilterValueType.fixedSet,
+        valueType: FilterValueType.fixedSet,
         domain: Object.values(ResearchMethodType)
     }),
     method: new CategoryEnum("SE Method", {
         dbField: "methodType",
-        dataType: FilterValueType.fixedSet,
+        valueType: FilterValueType.fixedSet,
         domain: Object.values(MethodType)
     }),
     methodology: new CategoryEnum("Methodology", {
         dbField: "methodologyType",
-        dataType: FilterValueType.fixedSet,
+        valueType: FilterValueType.fixedSet,
         domain: Object.values(MethodologyType)
     }),
     benefit: new CategoryEnum("Benefit", {
         dbField: "benefit",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     participant: new CategoryEnum("Participant", {
         dbField: "participant",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     contextWhere: new CategoryEnum("Where", {
         dbField: "context.where",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     contextWhen: new CategoryEnum("When", {
         dbField: "context.when",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     contextWhat: new CategoryEnum("What", {
         dbField: "context.what",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     contextWhom: new CategoryEnum("Whom", {
         dbField: "context.whom",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     contextHow: new CategoryEnum("How", {
         dbField: "context.how",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     result: new CategoryEnum("Where", {
         dbField: "result",
-        dataType: FilterValueType.stringInput
+        valueType: FilterValueType.stringInput
     }),
     integrity: new CategoryEnum("Where", {
         dbField: "integrity",
-        dataType: FilterValueType.fixedSet,
+        valueType: FilterValueType.fixedSet,
         domain: Object.values(IntegrityType)
     }),
 };
