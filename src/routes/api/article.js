@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
         const {
             filters,
             sort
-        }= req.body;
+        } = req.body;
 
         // Build query filter.
         const query = {};
