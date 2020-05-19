@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
     try {
         const {
             filters,
+            dates,
             sort
         } = req.body;
 
@@ -26,6 +27,16 @@ router.post("/", async (req, res) => {
                 query[f.category] = QueryFilterBuilder.buildForQuery(f);
             }
         });
+
+        // Apply date filtering.
+        if (Array.isArray(dates) && dates.length === 2) {
+            const minDate = new Date(dates[0]);
+            const maxDate = new Date(dates[1]);
+            query["submission.date"] = {
+                $gte: minDate.toISOString(),
+                $lte: maxDate.toISOString()
+            };
+        }
 
         // Apply sorting.
         const sortOption = {};
