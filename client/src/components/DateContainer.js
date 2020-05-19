@@ -46,7 +46,6 @@ const DateContainer = ({ style }) => {
     setMonthRange(value);
   };
 
-
   const classes = useStyles();
 
   const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -54,7 +53,8 @@ const DateContainer = ({ style }) => {
   ];
 
   function getMonthName(monthNum) {
-    const shortName = monthNames[monthNum].charAt(0).toUpperCase() + monthNames[monthNum].substring(1, 3);
+    const shortName = monthNames[monthNum].charAt(0).toUpperCase() +
+      monthNames[monthNum].substring(1, 3);
     return shortName;
   }
 
@@ -94,7 +94,7 @@ const DateContainer = ({ style }) => {
         </Grid>
         <Grid item xs={2}>
           <Typography id="month-range-slider" gutterBottom>
-            Month
+            Month (probably dont need this)
           </Typography>
           <Slider
             min={0}
@@ -121,7 +121,7 @@ const DateContainer = ({ style }) => {
         </Grid>
       </Grid>
     </Container>
-  )
-}
+  );
+};
 
 export default DateContainer;

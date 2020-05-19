@@ -1,6 +1,7 @@
 import React from 'react';
 import FilterContainer from "../components/FilterContainer";
-import DateContainer from "../components/DateContainer"
+import DateContainer from "../components/DateContainer";
+
 const SearchView = () => {
   return (
     <div>
