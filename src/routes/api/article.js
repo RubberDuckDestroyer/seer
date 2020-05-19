@@ -11,9 +11,13 @@ const router = express.Router();
 // @access   Public
 router.post("/", async (req, res) => {
     try {
-        const filters = req.body;
-        const query = {};
+        const {
+            filters,
+            sort
+        }= req.body;
 
+        // Build query filter.
+        const query = {};
         filters.forEach(f => {
             if (typeof (f) === "string") {
                 // TODO: This is either AND or OR.
@@ -23,8 +27,17 @@ router.post("/", async (req, res) => {
             }
         });
 
+        // Apply sorting.
+        const sortOption = {};
+        if (typeof (sort) === "object") {
+            sortOption[sort.key] = sort.order;
+        }
+        else {
+            sortOption["submission.bibliography.TITLE"] = 1;
+        }
+
         // TODO: Get back to $and and $or joining when the PO gives an answer.
-        const result = await Article.find(query);
+        const result = await Article.find(query).sort(sortOption);
 
         res.json(new ApiResponse(true, result));
     }
