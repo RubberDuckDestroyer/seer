@@ -1,5 +1,5 @@
-import Enum from "./Enum";
 import RegexUtils from "../RegexUtils";
+import Enum from "./Enum";
 
 interface IFilterConditionParam {
     queryTargetBuilder?: (value: any) => any
