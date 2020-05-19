@@ -119,7 +119,7 @@ const FilterContainer = ({ style }) => {
             >
               {
                 getFilterArray(category).map((item, index) => {
-                  return <MenuItem key={item} value={index}>{item}</MenuItem>
+                  return <MenuItem key={item} value={index}>{item}</MenuItem>;
                 })
               }
             </Select>
