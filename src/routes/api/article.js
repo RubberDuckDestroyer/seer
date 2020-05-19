@@ -1,8 +1,9 @@
-const express = require("express");
+import express from "express";
 
-const Article = require("../../models/Article");
-const QueryFilterBuilder = require("../../libs/QueryFilterBuilder");
-const ApiResponse = require("../../libs/ApiResponse");
+import Article from "../../models/Article";
+import QueryFilterBuilder from "../../libs/QueryFilterBuilder";
+import ApiResponse from "../../libs/ApiResponse";
+import DateUtils from "../../libs/DateUtils";
 
 const router = express.Router();
 
@@ -30,11 +31,9 @@ router.post("/", async (req, res) => {
 
         // Apply date filtering.
         if (Array.isArray(dates) && dates.length === 2) {
-            const minDate = new Date(dates[0]);
-            const maxDate = new Date(dates[1]);
-            query["submission.date"] = {
-                $gte: minDate.toISOString(),
-                $lte: maxDate.toISOString()
+            query["submission.bibliography.DATE"] = {
+                $gte: DateUtils.toUTC(dates[0]),
+                $lte: DateUtils.toUTC(dates[1])
             };
         }
 
