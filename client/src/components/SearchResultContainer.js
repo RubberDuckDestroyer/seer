@@ -37,7 +37,7 @@ const SearchResultContainer = () => {
                             <TableCell>Date</TableCell>
                             <TableCell>Title</TableCell>
                             <TableCell>Authors</TableCell>
-                            <TableCell>SE Methodology</TableCell>
+                            <TableCell>SE Method</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -50,8 +50,13 @@ const SearchResultContainer = () => {
                                         </TableCell>
                                         <TableCell>{article.getTitle()}</TableCell>
                                         <TableCell>{article.getAuthor()}</TableCell>
-                                        <TableCell></TableCell>
-                                        {/* <TableCell>{article.getMethodologyType().name}</TableCell> */}
+                                        <TableCell>
+                                            {
+                                                article.getMethodType() === null ?
+                                                    "" :
+                                                    article.getMethodType().name
+                                            }
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })
