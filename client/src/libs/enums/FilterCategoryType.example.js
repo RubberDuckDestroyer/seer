@@ -1,3 +1,6 @@
+import { expect } from "chai";
+import { describe, it } from "mocha";
+
 import FilterCategoryType from "./FilterCategoryType";
 
 /**
@@ -45,3 +48,14 @@ const getDropdownValues = () => {
     const exampleCategory = FilterCategoryType.authors;
     return exampleCategory.domain;
 };
+
+describe("Testing FilterCategoryType", () => {
+    it("Tests wheter category names can be retrieved", () => {
+        const names = getCategories();
+        expect(names.find(n => n.name === "Benefit")).to.equal(FilterCategoryType.benefit);
+        expect(names.find(n => n.name === "Metric")).to.equal(FilterCategoryType.metric);
+    });
+    it("Tests whether field names are returned correctly", () => {
+        expect(FilterCategoryType.authors.dbField).to.equal("submission.bibliography.AUTHOR");
+    });
+});

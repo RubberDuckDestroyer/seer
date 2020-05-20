@@ -10,16 +10,32 @@ export interface IRequest {
     request(): Promise<ApiResponse>
 }
 
+interface ApiResponseParam {
+    isSuccess: boolean;
+    data?: any;
+    error?: String;
+}
+
+function isApiResponseParam(object: any): object is ApiResponseParam {
+    return 'isSuccess' in object &&
+        ('data' in object || 'error' in object);
+}
+
 export class ApiResponse {
 
     isSuccess: boolean = false;
     data: any = null;
     error: String = "";
 
-    constructor(response: AxiosResponse | Error) {
+    constructor(response: AxiosResponse | Error | ApiResponseParam) {
         if (response instanceof Error) {
             this.isSuccess = false;
             this.error = response.message;
+        }
+        else if (isApiResponseParam(response)) {
+            this.isSuccess = response.isSuccess;
+            this.data = response.data;
+            this.error = response.error;
         }
         else {
             if (response.status !== 200) {
