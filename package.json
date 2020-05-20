@@ -10,7 +10,7 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-all": "npm install && cd client && npm install && cd ../",
-    "copy-shared-lib": "rm -rf ./client/src/libs && cp -R ./src/libs ./client/src/libs",
+    "copy-shared-lib": "run-script-os",
     "copy-shared-lib:darwin:linux": "rm -rf ./client/src/libs && cp -R ./src/libs ./client/src/libs",
     "copy-shared-lib:win32": "rd /s /q ./client/src/libs && xcopy ./src/libs ./client/src/libs",
     "pretest": "npm run copy-shared-lib && eslint --ignore-path .eslintignore .",
