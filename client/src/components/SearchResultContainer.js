@@ -46,11 +46,12 @@ const SearchResultContainer = () => {
                                 return (
                                     <TableRow key={article.getTitle()}>
                                         <TableCell component="th" scope="row">
-                                            {moment(article.getDate()).format("YYYY mm")}
+                                            {moment(article.getDate()).format("YYYY-MMMM")}
                                         </TableCell>
                                         <TableCell>{article.getTitle()}</TableCell>
                                         <TableCell>{article.getAuthor()}</TableCell>
-                                        <TableCell>{article.getMethodologyType().name}</TableCell>
+                                        <TableCell></TableCell>
+                                        {/* <TableCell>{article.getMethodologyType().name}</TableCell> */}
                                     </TableRow>
                                 );
                             })
