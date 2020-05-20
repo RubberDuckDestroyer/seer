@@ -12,6 +12,7 @@ const SearchView = () => {
         backgroundColor: "#f88",
         height: "64px"
       }} />
+      <Box m={1} />
       <DateContainer style={{
         backgroundColor: "#8f8",
         height: "64px"
