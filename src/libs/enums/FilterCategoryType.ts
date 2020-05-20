@@ -108,7 +108,7 @@ const FilterCategoryType = {
         valueType: FilterValueType.stringInput
     }),
     integrity: new CategoryEnum("Where", {
-        dbField: "integrity",
+        dbField: "integrityType",
         valueType: FilterValueType.fixedSet,
         domain: Object.values(IntegrityType)
     }),

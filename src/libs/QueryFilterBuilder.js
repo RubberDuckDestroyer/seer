@@ -1,4 +1,4 @@
-import Enum from "./enums/Enum";
+import Enum from "./enums/Enum.ts";
 import FilterConditionType from "./enums/FilterConditionType.ts";
 
 const QueryFilterBuilder = {

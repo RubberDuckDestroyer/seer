@@ -8,11 +8,11 @@ import {
   makeStyles
 } from "@material-ui/core";
 
-import MethodType from "../libs/enums/MethodType";
-import MethodologyType from "../libs/enums/MethodologyType";
-import ParticipantType from "../libs/enums/ParticipantType";
-import ResearchMethodType from "../libs/enums/ResearchMethodType";
-import ResourceType from "../libs/enums/ResourceType";
+import MethodType from "../libs/enums/MethodType.ts";
+import MethodologyType from "../libs/enums/MethodologyType.ts";
+import ParticipantType from "../libs/enums/ParticipantType.ts";
+import ResearchMethodType from "../libs/enums/ResearchMethodType.ts";
+import ResourceType from "../libs/enums/ResourceType.ts";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {

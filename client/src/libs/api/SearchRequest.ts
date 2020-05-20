@@ -1,5 +1,7 @@
-import { IRequest, ApiResponse, getUrl } from "./NetworkHelper";
+import { ApiResponse, getUrl } from "./NetworkHelper";
 import axios from "axios";
+import ArticleInfo from "../types/ArticleInfo";
+import { IRequestT } from "../../../client/src/libs/api/NetworkHelper";
 
 interface ISearchFilter {
     category: String,
@@ -19,7 +21,25 @@ interface ISearchRequestParam {
     sort: ISearchSort
 }
 
-export default class SearchRequest implements IRequest {
+class SearchResponse extends ApiResponse {
+
+    private _articles: ArticleInfo[] | undefined;
+
+    
+    getArticles() {
+        if (this._articles === undefined) {
+            this._articles = new Array<ArticleInfo>();
+
+            const data = this.data as any[];
+            if (Array.isArray(data)) {
+                data.forEach(d => this._articles.push(new ArticleInfo(d)));
+            }
+        }
+        return this._articles;
+    }
+}
+
+export default class SearchRequest implements IRequestT<SearchResponse> {
 
     params: ISearchRequestParam;
 
@@ -38,10 +58,10 @@ export default class SearchRequest implements IRequest {
                 ],
                 sort: this.params.sort
             };
-            return new ApiResponse(await axios.post(getUrl("/api/article"), body));
+            return new SearchResponse(await axios.post(getUrl("/api/article"), body));
         }
         catch (e) {
-            return new ApiResponse(e);
+            return new SearchResponse(e);
         }
     }
 }
