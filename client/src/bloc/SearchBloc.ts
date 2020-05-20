@@ -17,6 +17,15 @@ export class SearchFilterInfo {
         this.category = new Bindable<FilterCategoryEnum>(defaultCategory);
         this.condition = new Bindable<Enum>(defaultCategory.valueType.conditions[0]);
         this.value = new Bindable<String>("");
+
+        this.category.subscribe((v: FilterCategoryEnum) => {
+            if (v.valueType.isDropdown && v.domain !== null)
+                this.value.setValue(v.domain[0].name);
+            else
+                this.value.setValue("");
+            
+            this.condition.setValue(v.valueType.conditions[0]);
+        });
     }
 }
 

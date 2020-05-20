@@ -38,5 +38,6 @@
     "chai": "^4.2.0",
     "mocha": "^7.1.2",
     "typescript": "^3.9.2"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

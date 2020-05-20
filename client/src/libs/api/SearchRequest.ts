@@ -61,7 +61,10 @@ export default class SearchRequest implements IRequestT<SearchResponse> {
                 ],
                 sort: this.params.sort
             };
-            return new SearchResponse(await axios.post(getUrl("/api/article"), body));
+            console.log(JSON.stringify(body));
+            const response = await axios.post(getUrl("/api/article"), body);
+            console.log(response.data);
+            return new SearchResponse(response);
         }
         catch (e) {
             return new SearchResponse(e);

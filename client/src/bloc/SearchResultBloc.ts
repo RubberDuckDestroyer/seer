@@ -40,11 +40,13 @@ export default class SearchResultBloc extends BaseBloc {
                     condition: f.condition.getValue().name,
                     value: f.value.getValue()
                 })),
-                minDate: DateUtils.toUTC(this.searchBloc.minDate.getValue()),
-                maxDate: DateUtils.toUTC(this.searchBloc.maxDate.getValue()),
+                dates: [
+                    DateUtils.toUTC(this.searchBloc.minDate.getValue()),
+                    DateUtils.toUTC(this.searchBloc.maxDate.getValue())
+                ],
                 sort: {
                     key: this.searchBloc.sort.sort.getValue().dbField,
-                    isAscending: this.searchBloc.sort.isAscending.getValue()
+                    order: this.searchBloc.sort.isAscending.getValue() ? 1 : -1
                 }
             }).request();
 

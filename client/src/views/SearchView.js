@@ -7,6 +7,7 @@ import SearchResultContainer from "../components/SearchResultContainer";
 import AppContext from "../AppContext";
 import SearchResultBloc from "../bloc/SearchResultBloc";
 import LoaderBloc from "../bloc/LoaderBloc";
+import SearchBloc from "../bloc/SearchBloc";
 
 const useStyle = makeStyles((theme) => ({
   searchContainer: {
@@ -20,6 +21,7 @@ const useStyle = makeStyles((theme) => ({
 
 const SearchView = () => {
 
+  const searchBloc = useContext(AppContext).getBloc(SearchBloc);
   const searchResultBloc = useContext(AppContext).getBloc(SearchResultBloc);
   const loaderBloc = useContext(AppContext).getBloc(LoaderBloc);
 
@@ -33,10 +35,13 @@ const SearchView = () => {
 
   return (
     <Container>
-      <FilterContainer style={{
-        backgroundColor: "#f88",
-        height: "64px"
-      }} />
+      <FilterContainer
+        style={{
+          backgroundColor: "#f88",
+          height: "64px"
+        }}
+        searchFilter={searchBloc.filters.getValue()[0]}
+      />
       <Box m={1} />
       <DateContainer style={{
         backgroundColor: "#8f8",
