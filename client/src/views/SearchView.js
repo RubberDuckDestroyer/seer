@@ -1,13 +1,38 @@
-import React from 'react';
-import { Box } from "@material-ui/core";
+import React, { useContext } from 'react';
+import { Box, Button, makeStyles, Container } from "@material-ui/core";
 
 import FilterContainer from "../components/FilterContainer";
 import DateContainer from "../components/DateContainer";
 import SearchResultContainer from "../components/SearchResultContainer";
+import AppContext from "../AppContext";
+import SearchResultBloc from "../bloc/SearchResultBloc";
+import LoaderBloc from "../bloc/LoaderBloc";
+
+const useStyle = makeStyles((theme) => ({
+  searchContainer: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  searchButton: {
+    width: 300
+  }
+}));
 
 const SearchView = () => {
+
+  const searchResultBloc = useContext(AppContext).getBloc(SearchResultBloc);
+  const loaderBloc = useContext(AppContext).getBloc(LoaderBloc);
+
+  const classes = useStyle();
+
+  const onSearchButton = async () => {
+    loaderBloc.show();
+    await searchResultBloc.requestResults();
+    loaderBloc.hide();
+  };
+
   return (
-    <div>
+    <Container>
       <FilterContainer style={{
         backgroundColor: "#f88",
         padding: "10px"
@@ -18,10 +43,12 @@ const SearchView = () => {
         padding: "10px"
       }} />
       <Box m={2} />
-      <SearchResultContainer
-
-      />
-    </div>
+      <Box className={classes.searchContainer}>
+        <Button className={classes.searchButton} onClick={onSearchButton} color="primary" variant="contained">Search</Button>
+      </Box>
+      <Box m={2} />
+      <SearchResultContainer />
+    </Container>
   );
 };
 export default SearchView;
