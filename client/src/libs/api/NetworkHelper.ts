@@ -35,7 +35,8 @@ export class ApiResponse {
         else if (isApiResponseParam(response)) {
             this.isSuccess = response.isSuccess;
             this.data = response.data;
-            this.error = response.error;
+            if(typeof(this.error) === "string")
+                this.error = response.error;
         }
         else {
             if (response.status !== 200) {
