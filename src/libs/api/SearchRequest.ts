@@ -1,7 +1,7 @@
 import { ApiResponse, getUrl } from "./NetworkHelper";
 import axios from "axios";
 import ArticleInfo from "../types/ArticleInfo";
-import { IRequestT } from "../../../client/src/libs/api/NetworkHelper";
+import { IRequestT } from "./NetworkHelper";
 
 interface ISearchFilter {
     category: String,
@@ -23,12 +23,13 @@ interface ISearchRequestParam {
 
 class SearchResponse extends ApiResponse {
 
-    private _articles: ArticleInfo[] | undefined;
+    private _isInitialized: boolean = false;
+    private _articles: ArticleInfo[] = new Array<ArticleInfo>();
 
-    
+
     getArticles() {
-        if (this._articles === undefined) {
-            this._articles = new Array<ArticleInfo>();
+        if (!this._isInitialized) {
+            this._isInitialized = true;
 
             const data = this.data as any[];
             if (Array.isArray(data)) {

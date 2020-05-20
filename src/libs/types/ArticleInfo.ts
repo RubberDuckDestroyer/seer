@@ -13,8 +13,10 @@ export default class ArticleInfo {
     submission: any;
     bibliography: any;
 
-    cachedCredibility: number | undefined;
-    cachedQuality: number | undefined;
+    cachedCredibility: boolean = false;
+    cachedQuality: boolean = false;
+    credibility: number = 0;
+    quality: number = 0;
 
 
     constructor(rawArticle: any) {
@@ -44,39 +46,43 @@ export default class ArticleInfo {
     getDate() { return DateUtils.toUTC(this.bibliography.DATE as String); }
 
     getCredibility() {
-        if (this.cachedCredibility === undefined) {
+        if (!this.cachedCredibility) {
+            this.cachedCredibility = true;
+
             if (this.rawArticle.credibilityOverride !== undefined) {
-                this.cachedCredibility = this.rawArticle.credibilityOverride as number;
+                this.credibility = this.rawArticle.credibilityOverride as number;
             }
             else if(Array.isArray(this.rawArticle.credibilityRatings)) {
                 const ratings = this.rawArticle.credibilityRatings as any[];
                 if (ratings.length > 0) {
-                    ratings.forEach(r => this.cachedCredibility += (r.rating as number));
-                    this.cachedCredibility /= ratings.length;
+                    ratings.forEach(r => this.credibility += (r.rating as number));
+                    this.credibility /= ratings.length;
                 }
                 else {
-                    this.cachedCredibility = 0;
+                    this.credibility = 0;
                 }
             }
             else {
-                this.cachedCredibility = 0;
+                this.credibility = 0;
             }
         }
-        return this.cachedCredibility;
+        return this.credibility;
     }
 
     getQuality() {
-        if (this.cachedQuality === undefined) {
+        if (!this.cachedQuality) {
+            this.cachedQuality = true;
+
             const ratings = this.rawArticle.qualityRatings as any[];
             if (Array.isArray(ratings) && ratings.length > 0) {
-                ratings.forEach(r => this.cachedQuality += (r.rating as number));
-                this.cachedQuality /= ratings.length;
+                ratings.forEach(r => this.quality += (r.rating as number));
+                this.quality /= ratings.length;
             }
             else {
-                this.cachedQuality = 0;
+                this.quality = 0;
             }
         }
-        return this.cachedQuality;
+        return this.quality;
     }
 
     getQuestion() { return this.rawArticle.question as String; }
@@ -102,7 +108,7 @@ export default class ArticleInfo {
         if (Array.isArray(participants) && participants.length > 0) {
             return participants.map(p => Enum.findByName(ParticipantType, p));
         }
-        return new Array<ParticipantType>();
+        return new Array<Enum>();
     }
 
     getContext() {

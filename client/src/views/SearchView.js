@@ -1,6 +1,9 @@
 import React from 'react';
+import { Box } from "@material-ui/core";
+
 import FilterContainer from "../components/FilterContainer";
 import DateContainer from "../components/DateContainer";
+import SearchResultContainer from "../components/SearchResultContainer";
 
 const SearchView = () => {
   return (
@@ -13,6 +16,10 @@ const SearchView = () => {
         backgroundColor: "#8f8",
         height: "64px"
       }} />
+      <Box m={2}/>
+      <SearchResultContainer
+
+      />
     </div>
   );
 };

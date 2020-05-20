@@ -1,13 +1,13 @@
 import React, { } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import AppContext from "./AppContext";
+import AppContext, { AppContextValue } from "./AppContext";
 import SearchView from "./views/SearchView";
 
 const App = () => {
   return (
     <div>
-      <AppContext>
+      <AppContext.Provider value={AppContextValue}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/">
@@ -15,7 +15,7 @@ const App = () => {
             </Route>
           </Switch>
         </BrowserRouter>
-      </AppContext>
+      </AppContext.Provider>
     </div>
   );
 };

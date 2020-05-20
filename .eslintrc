@@ -36,6 +36,8 @@
     "comma-style": "off",
     "max-classes-per-file": "off",
     "no-param-reassign": "off",
-    "newline-per-chained-call": "off"
+    "newline-per-chained-call": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   }
 }
