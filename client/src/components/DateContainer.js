@@ -8,6 +8,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 
+
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
     padding: "auto",
@@ -66,7 +67,7 @@ const DateContainer = ({ style }) => {
       }}
     >
       <Grid className={classes.gridContainer} container spacing={1}>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <TextField
             id="startDate"
             label="From Date"
@@ -79,11 +80,12 @@ const DateContainer = ({ style }) => {
             }}
           />
         </Grid>
-        <Grid item xs={2}>
-          <Typography id="year-range-slider" gutterBottom>
+        <Grid item xs={4} >
+          <Typography id="year-range-slider" gutterBottom >
             Year
           </Typography>
           <Slider
+            style={{ width: "90%" }}
             min={1900}
             max={new Date().getFullYear()}
             value={yearRange}
@@ -92,11 +94,12 @@ const DateContainer = ({ style }) => {
             aria-labelledby="range-slider"
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <Typography id="month-range-slider" gutterBottom>
-            Month (probably dont need this)
+            Month
           </Typography>
           <Slider
+            style={{ width: "90%" }}
             min={0}
             max={11}
             value={monthRange}
@@ -106,7 +109,7 @@ const DateContainer = ({ style }) => {
             valueLabelFormat={getMonthName}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <TextField
             id="endDate"
             label="To Date"

@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import { Box, Button, makeStyles, Container } from "@material-ui/core";
+import {
+  Box, Button, makeStyles, Container
+} from "@material-ui/core";
 
 import FilterContainer from "../components/FilterContainer";
 import DateContainer from "../components/DateContainer";
@@ -38,14 +40,13 @@ const SearchView = () => {
       <FilterContainer
         style={{
           backgroundColor: "#f88",
-          height: "64px"
         }}
         searchFilter={searchBloc.filters.getValue()[0]}
       />
-      <Box m={1} />
+      <Box m={3} />
       <DateContainer style={{
         backgroundColor: "#8f8",
-        height: "64px"
+        padding: "10px"
       }} />
       <Box m={2} />
       <Box className={classes.searchContainer}>
