@@ -22,11 +22,13 @@ const createRequest = () => {
                 value: exampleValue.name
             }
         ],
-        minDate: new Date("2001-07-31"),
-        maxDate: new Date("2001-08-01"),
+        dates: [
+            new Date("2001-07-31"),
+            new Date("2001-08-01")
+        ],
         sort: {
             key: exampleSort.dbField,
-            isAscending: true
+            order: 1
         }
     });
 }

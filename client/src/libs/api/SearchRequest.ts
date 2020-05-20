@@ -11,13 +11,15 @@ interface ISearchFilter {
 
 interface ISearchSort {
     key: String,
-    isAscending: boolean
+    order: number
 }
 
 interface ISearchRequestParam {
     filters: ISearchFilter[],
-    minDate: Date,
-    maxDate: Date,
+    dates: [
+        Date,
+        Date
+    ],
     sort: ISearchSort
 }
 
@@ -54,8 +56,8 @@ export default class SearchRequest implements IRequestT<SearchResponse> {
             const body = {
                 filters: this.params.filters,
                 dates: [
-                    this.params.minDate.toISOString(),
-                    this.params.maxDate.toISOString()
+                    this.params.dates[0].toISOString(),
+                    this.params.dates[1].toISOString()
                 ],
                 sort: this.params.sort
             };
