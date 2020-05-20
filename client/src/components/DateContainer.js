@@ -94,7 +94,7 @@ const DateContainer = ({ style }) => {
         </Grid>
         <Grid item xs={2}>
           <Typography id="month-range-slider" gutterBottom>
-            Month (probably dont need this)
+            Month
           </Typography>
           <Slider
             min={0}
