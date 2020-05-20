@@ -103,11 +103,11 @@ const FilterCategoryType = {
         dbField: "context.how",
         valueType: FilterValueType.stringInput
     }),
-    result: new FilterCategoryEnum("Where", {
+    result: new FilterCategoryEnum("Result", {
         dbField: "result",
         valueType: FilterValueType.stringInput
     }),
-    integrity: new FilterCategoryEnum("Where", {
+    integrity: new FilterCategoryEnum("Integrity", {
         dbField: "integrityType",
         valueType: FilterValueType.fixedSet,
         domain: Object.values(IntegrityType)
