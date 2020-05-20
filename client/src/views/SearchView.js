@@ -10,14 +10,14 @@ const SearchView = () => {
     <div>
       <FilterContainer style={{
         backgroundColor: "#f88",
-        height: "64px"
+        padding: "10px"
       }} />
-      <Box m={1} />
+      <Box m={3} />
       <DateContainer style={{
         backgroundColor: "#8f8",
-        height: "64px"
+        padding: "10px"
       }} />
-      <Box m={2}/>
+      <Box m={2} />
       <SearchResultContainer
 
       />
