@@ -1,8 +1,9 @@
-const express = require("express");
+import express from "express";
 
-const Article = require("../../models/Article");
-const QueryFilterBuilder = require("../../libs/QueryFilterBuilder");
-const ApiResponse = require("../../libs/ApiResponse");
+import Article from "../../models/Article";
+import QueryFilterBuilder from "../../libs/QueryFilterBuilder";
+import DateUtils from "../../libs/DateUtils";
+import { ApiResponse } from "../../libs/api/NetworkHelper.ts";
 
 const router = express.Router();
 
@@ -30,11 +31,9 @@ router.post("/", async (req, res) => {
 
         // Apply date filtering.
         if (Array.isArray(dates) && dates.length === 2) {
-            const minDate = new Date(dates[0]);
-            const maxDate = new Date(dates[1]);
-            query["submission.date"] = {
-                $gte: minDate.toISOString(),
-                $lte: maxDate.toISOString()
+            query["submission.bibliography.DATE"] = {
+                $gte: DateUtils.toUTC(dates[0]),
+                $lte: DateUtils.toUTC(dates[1])
             };
         }
 
@@ -50,10 +49,13 @@ router.post("/", async (req, res) => {
         // TODO: Get back to $and and $or joining when the PO gives an answer.
         const result = await Article.find(query).sort(sortOption);
 
-        res.json(new ApiResponse(true, result));
+        res.json(new ApiResponse({
+            isSuccess: true,
+            data: result
+        }));
     }
     catch (e) {
-        res.status(401).json(new ApiResponse(false, e.toString()));
+        res.status(401).json(new ApiResponse(e));
     }
 });
 module.exports = router;

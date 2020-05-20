@@ -1,8 +1,10 @@
+import Enum from "./Enum";
+
 const ResearchMethodType = {
-    caseStudy: "Case study",
-    fieldObservation: "Field observation",
-    experiment: "Experiment",
-    interview: "Interview",
-    survey: "Survey"
+    caseStudy: new Enum("Case study"),
+    fieldObservation: new Enum("Field observation"),
+    experiment: new Enum("Experiment"),
+    interview: new Enum("Interview"),
+    survey: new Enum("Survey")
 };
-module.exports = ResearchMethodType;
+export default ResearchMethodType;

@@ -1,7 +1,7 @@
-const expect = require("chai").expect;
-const { describe, it } = require("mocha");
+import { expect } from "chai";
+import { describe, it } from "mocha";
 
-const BibtexParser = require("../libs/BibtexParser");
+import BibtexParser from "./BibtexParser";
 
 describe("Testing BibtexParser functions", () => {
     it("Tests whether Bibtex format string can be parsed", () => {

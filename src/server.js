@@ -8,7 +8,9 @@ const connectDB = require("./config/db");
 const app = express();
 
 // Connect Database
-connectDB();
+if (process.env.NODE_ENV !== "test") {
+  connectDB();
+}
 
 // Init Middleware
 app.use(express.json({ extended: false }));
