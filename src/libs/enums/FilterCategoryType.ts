@@ -14,7 +14,7 @@ class CategoryEnum extends Enum {
 
     dbField: String;
     valueType: FilterValueEnum;
-    domain: Enum[];
+    domain: Enum[] | null;
 
     constructor(name: String, param: ICategoryEnumParam) {
         super(name);

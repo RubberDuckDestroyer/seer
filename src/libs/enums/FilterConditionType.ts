@@ -7,17 +7,18 @@ interface IFilterConditionParam {
 
 export class FilterConditionEnum extends Enum {
 
-    queryTargetBuilder: (value: any) => any;
+    queryTargetBuilder: (value: any) => any = (v) => v;
 
 
     constructor(name: String, param?: IFilterConditionParam) {
         super(name);
         if (param) {
-            this.queryTargetBuilder = param.queryTargetBuilder;
+            if(param.queryTargetBuilder !== undefined)
+                this.queryTargetBuilder = param.queryTargetBuilder;
         }
     }
 
-    getQueryTarget(value) {
+    getQueryTarget(value: any) {
         if (typeof (this.queryTargetBuilder) === "function") {
             return this.queryTargetBuilder(value);
         }

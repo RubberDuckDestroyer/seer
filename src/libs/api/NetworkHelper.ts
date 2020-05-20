@@ -25,7 +25,7 @@ export class ApiResponse {
 
     isSuccess: boolean = false;
     data: any = null;
-    error: String = "";
+    error: String | undefined = "";
 
     constructor(response: AxiosResponse | Error | ApiResponseParam) {
         if (response instanceof Error) {
@@ -35,8 +35,7 @@ export class ApiResponse {
         else if (isApiResponseParam(response)) {
             this.isSuccess = response.isSuccess;
             this.data = response.data;
-            if(typeof(this.error) === "string")
-                this.error = response.error;
+            this.error = response.error;
         }
         else {
             if (response.status !== 200) {
