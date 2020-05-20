@@ -8,12 +8,12 @@ import {
   makeStyles
 } from "@material-ui/core";
 
-// import FilterCategoryType from "../libs/enums/FilterCategoryType.ts";
-import MethodType from "../libs/enums/MethodType.ts";
-import MethodologyType from "../libs/enums/MethodologyType.ts";
-import ParticipantType from "../libs/enums/ParticipantType.ts";
-import ResearchMethodType from "../libs/enums/ResearchMethodType.ts";
-import ResourceType from "../libs/enums/ResourceType.ts";
+// import FilterCategoryType from "../libs/enums/FilterCategoryType";
+import MethodType from "../libs/enums/MethodType";
+import MethodologyType from "../libs/enums/MethodologyType";
+import ParticipantType from "../libs/enums/ParticipantType";
+import ResearchMethodType from "../libs/enums/ResearchMethodType";
+import ResourceType from "../libs/enums/ResourceType";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -100,31 +100,34 @@ const FilterContainer = ({ style }) => {
           </Select>
         </Grid>
         <Grid item xs={4}>
-          {isTextInput && (
-            <TextField
-              className={classes.selectionItem}
-              variant="standard"
-              label="Value"
-              value={value}
-              onChange={onChangeValue}
-              error={false}
-              helperText={""}
-            />
-          )}
-
-          {!isTextInput && (
-            <Select
-              className={classes.selectionItem}
-              value={value}
-              onChange={onChangeValue}
-            >
-              {
-                getFilterArray(category).map((item, index) => {
-                  return <MenuItem key={item} value={index}>{item}</MenuItem>;
-                })
-              }
-            </Select>
-          )}
+          {
+            isTextInput && (
+              <TextField
+                className={classes.selectionItem}
+                variant="standard"
+                label="Value"
+                value={value}
+                onChange={onChangeValue}
+                error={false}
+                helperText={""}
+              />
+            )
+          }
+          {
+            !isTextInput && (
+              <Select
+                className={classes.selectionItem}
+                value={value}
+                onChange={onChangeValue}
+              >
+                {
+                  getFilterArray(category).map((item, index) => {
+                    return <MenuItem key={item} value={index}>{item.name}</MenuItem>;
+                  })
+                }
+              </Select>
+            )
+          }
         </Grid>
       </Grid>
     </Container>

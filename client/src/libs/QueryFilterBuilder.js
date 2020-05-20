@@ -1,5 +1,5 @@
-import Enum from "./enums/Enum.ts";
-import FilterConditionType from "./enums/FilterConditionType.ts";
+import Enum from "./enums/Enum";
+import FilterConditionType from "./enums/FilterConditionType";
 
 const QueryFilterBuilder = {
 
@@ -12,4 +12,4 @@ const QueryFilterBuilder = {
         return conditionType.getQueryTarget(value);
     }
 };
-module.exports = QueryFilterBuilder;
+export default QueryFilterBuilder;

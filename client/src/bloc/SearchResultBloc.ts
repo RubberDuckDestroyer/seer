@@ -3,8 +3,9 @@ import ArticleInfo from "../libs/types/ArticleInfo";
 import SearchRequest from "../libs/api/SearchRequest";
 import SearchBloc from "./SearchBloc";
 import DateUtils from "../libs/DateUtils";
+import BaseBloc from '../local-libs/bloc/BaseBloc';
 
-export default class SearchResultBloc {
+export default class SearchResultBloc extends BaseBloc {
 
     searchBloc: SearchBloc;
     results: Bindable<ArticleInfo[]>;
@@ -14,6 +15,7 @@ export default class SearchResultBloc {
 
 
     constructor(searchBloc: SearchBloc) {
+        super();
         this.searchBloc = searchBloc;
         this.results = new Bindable<ArticleInfo[]>(new Array<ArticleInfo>());
         this.isSuccess = new Bindable<boolean>(true);
