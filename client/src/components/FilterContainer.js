@@ -8,6 +8,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 
+// import FilterCategoryType from "../libs/enums/FilterCategoryType.ts";
 import MethodType from "../libs/enums/MethodType.ts";
 import MethodologyType from "../libs/enums/MethodologyType.ts";
 import ParticipantType from "../libs/enums/ParticipantType.ts";

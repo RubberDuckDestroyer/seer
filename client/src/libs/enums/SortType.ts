@@ -1,6 +1,6 @@
 import Enum from "./Enum";
 
-class SortEnum extends Enum {
+export class SortEnum extends Enum {
 
     dbField: String;
 
