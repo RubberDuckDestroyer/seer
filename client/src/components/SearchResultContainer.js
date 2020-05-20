@@ -43,7 +43,6 @@ const SearchResultContainer = () => {
                     <TableBody>
                         {
                             results.map(article => {
-                                console.log(`Date: ${moment(article.getDate()).format("YYYY mm")}, title: ${article.getTitle()}, author: ${article.getAuthor()}, methodology: ${article.getMethodologyType().name}`);
                                 return (
                                     <TableRow key={article.getTitle()}>
                                         <TableCell component="th" scope="row">
