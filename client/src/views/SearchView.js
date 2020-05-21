@@ -11,7 +11,7 @@ import SearchResultBloc from "../bloc/SearchResultBloc";
 import LoaderBloc from "../bloc/LoaderBloc";
 import SearchBloc from "../bloc/SearchBloc";
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(() => ({
   searchContainer: {
     display: "flex",
     justifyContent: "center"

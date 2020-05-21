@@ -15,7 +15,7 @@ import AppContext from "../AppContext";
 import SearchResultBloc from "../bloc/SearchResultBloc";
 import { useBindable } from "../local-libs/data/Bindable";
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(() => ({
     table: {
         minWidth: 650
     }

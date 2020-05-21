@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
+import {
+    makeStyles, Typography
+} from "@material-ui/core";
+
 import AppContext from "../AppContext";
 import LoaderBloc from "../bloc/LoaderBloc";
 import { useBindable } from "../local-libs/data/Bindable";
-import { makeStyles, Typography } from "@material-ui/core";
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(() => ({
     container: {
         backgroundColor: "rgba(0, 0, 0, 0.75)",
         position: "fixed",

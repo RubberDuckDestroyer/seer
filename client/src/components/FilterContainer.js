@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Select,
@@ -75,7 +75,7 @@ const FilterContainer = ({ style, searchFilter }) => {
           >
             {
               category.valueType.conditions.map(c => {
-                return <MenuItem key={c.name} value={c}>{c.name}</MenuItem>
+                return <MenuItem key={c.name} value={c}>{c.name}</MenuItem>;
               })
             }
           </Select>
