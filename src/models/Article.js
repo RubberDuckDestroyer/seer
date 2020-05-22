@@ -70,7 +70,7 @@ const ArticleSchema = new mongoose.Schema({
     },
     result: String,
     confidenceRating: Number,
-    integrity: String
+    integrityType: String
 });
 
 const Article = mongoose.model("Article", ArticleSchema);

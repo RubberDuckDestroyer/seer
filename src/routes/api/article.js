@@ -3,7 +3,7 @@ import express from "express";
 import Article from "../../models/Article";
 import QueryFilterBuilder from "../../libs/QueryFilterBuilder";
 import DateUtils from "../../libs/DateUtils";
-import { ApiResponse } from "../../libs/api/NetworkHelper.ts";
+import { ApiResponse } from "../../libs/api/NetworkHelper";
 
 const router = express.Router();
 

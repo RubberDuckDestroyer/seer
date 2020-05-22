@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Select,
@@ -8,11 +8,8 @@ import {
   makeStyles
 } from "@material-ui/core";
 
-import MethodType from "../libs/enums/MethodType";
-import MethodologyType from "../libs/enums/MethodologyType";
-import ParticipantType from "../libs/enums/ParticipantType";
-import ResearchMethodType from "../libs/enums/ResearchMethodType";
-import ResourceType from "../libs/enums/ResourceType";
+import { useBindable } from "../local-libs/data/Bindable";
+import FilterCategoryType from "../libs/enums/FilterCategoryType";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -27,45 +24,25 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FilterContainer = ({ style }) => {
-  const textInputCategories = ["author"];
+const FilterContainer = ({ style, searchFilter }) => {
 
-  const [category, setCategory] = useState("");
-  const [condition, setCondition] = useState("");
-  const [value, setValue] = useState("");
+  const category = useBindable(searchFilter.category);
+  const condition = useBindable(searchFilter.condition);
+  const value = useBindable(searchFilter.value);
 
-  const isTextInput = textInputCategories.includes(category);
+  const isTextInput = !category.valueType.isDropdown;
 
   const classes = useStyles();
 
   const onChangeCategory = (e) => {
-    setCategory(e.target.value);
-    setValue("0");
+    searchFilter.category.setValue(e.target.value);
   };
   const onChangeCondition = (e) => {
-    setCondition(e.target.value);
+    searchFilter.condition.setValue(e.target.value);
   };
   const onChangeValue = (e) => {
-    setValue(e.target.value);
+    searchFilter.value.setValue(e.target.value);
   };
-
-  // Gets the items for the drop down on the right, based on the left
-  function getFilterArray(filterString) {
-    switch (filterString) {
-      case "semethod":
-        return Object.values(MethodType);
-      case "semethodology":
-        return Object.values(MethodologyType);
-      case "participant":
-        return Object.values(ParticipantType);
-      case "researchmethod":
-        return Object.values(ResearchMethodType);
-      case "resourcetype":
-        return Object.values(ResourceType);
-      default:
-        return [];
-    }
-  }
 
   return (
     <Container
@@ -81,12 +58,13 @@ const FilterContainer = ({ style }) => {
             value={category}
             onChange={onChangeCategory}
           >
-            <MenuItem value={"semethod"}>SE Method</MenuItem>
-            <MenuItem value={"semethodology"}>SE Methodology</MenuItem>
-            <MenuItem value={"participant"}>Participants</MenuItem>
-            <MenuItem value={"researchmethod"}>Research Method</MenuItem>
-            <MenuItem value={"resourcetype"}>Resource</MenuItem>
-            <MenuItem value={"author"}>Author</MenuItem>
+            {
+              Object.values(FilterCategoryType).map(type => {
+                return (
+                  <MenuItem key={type.name} value={type}>{type.name}</MenuItem>
+                );
+              })
+            }
           </Select>
         </Grid>
         <Grid item xs={4}>
@@ -95,35 +73,42 @@ const FilterContainer = ({ style }) => {
             value={condition}
             onChange={onChangeCondition}
           >
-            <MenuItem value={"contains"}>CONTAINS</MenuItem>
+            {
+              category.valueType.conditions.map(c => {
+                return <MenuItem key={c.name} value={c}>{c.name}</MenuItem>;
+              })
+            }
           </Select>
         </Grid>
         <Grid item xs={4}>
-          {isTextInput && (
-            <TextField
-              className={classes.selectionItem}
-              variant="standard"
-              label="Value"
-              value={value}
-              onChange={onChangeValue}
-              error={false}
-              helperText={""}
-            />
-          )}
-
-          {!isTextInput && (
-            <Select
-              className={classes.selectionItem}
-              value={value}
-              onChange={onChangeValue}
-            >
-              {
-                getFilterArray(category).map((item, index) => {
-                  return <MenuItem key={item} value={index}>{item.name}</MenuItem>;
-                })
-              }
-            </Select>
-          )}
+          {
+            isTextInput && (
+              <TextField
+                className={classes.selectionItem}
+                variant="standard"
+                label="Value"
+                value={value}
+                onChange={onChangeValue}
+                error={false}
+                helperText={""}
+              />
+            )
+          }
+          {
+            !isTextInput && (
+              <Select
+                className={classes.selectionItem}
+                value={value}
+                onChange={onChangeValue}
+              >
+                {
+                  category.domain.map(item => {
+                    return <MenuItem key={item.name} value={item.name}>{item.name}</MenuItem>;
+                  })
+                }
+              </Select>
+            )
+          }
         </Grid>
       </Grid>
     </Container>

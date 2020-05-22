@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Container,
   TextField,
@@ -7,6 +7,9 @@ import {
   Typography,
   makeStyles
 } from "@material-ui/core";
+import AppContext from "../AppContext";
+import SearchBloc from "../bloc/SearchBloc";
+
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -22,25 +25,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DateContainer = ({ style }) => {
+
+  const searchBloc = useContext(AppContext).getBloc(SearchBloc);
+
   const [startDate, setStartDate] = useState(new Date().toString());
   const [endDate, setEndDate] = useState(new Date().toString());
   const [yearRange, setYearRange] = useState([1900, new Date().getFullYear()]);
   const [monthRange, setMonthRange] = useState([0, 11]);
 
   const onChangeStartDate = (e) => {
+    searchBloc.minDate.setValue(e.target.value);
     setStartDate(e.target.value);
   };
   const onChangeEndDate = (e) => {
+    searchBloc.maxDate.setValue(e.target.value);
     setEndDate(e.target.value);
   };
   const onChangeYearRange = (e, value) => {
     setYearRange(value);
 
-    const endDateString = new Date(`${value[1]}-${1}-${2}`).toISOString();
-    const startDateString = new Date(`${value[0]}-${1}-${2}`).toISOString();
+    const endDateString = new Date(`${value[1]}-0${1}-0${2}`).toISOString();
+    const startDateString = new Date(`${value[0]}-0${1}-0${2}`).toISOString();
 
-    setEndDate(endDateString.slice(0, 10));
-    setStartDate(startDateString.slice(0, 10));
+    onChangeEndDate({
+      target: { value: endDateString.slice(0, 10) }
+    });
+    onChangeStartDate({
+      target: { value: startDateString.slice(0, 10) }
+    });
   };
   const onChangeMonthRange = (e, value) => {
     setMonthRange(value);
@@ -66,7 +78,7 @@ const DateContainer = ({ style }) => {
       }}
     >
       <Grid className={classes.gridContainer} container spacing={1}>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <TextField
             id="startDate"
             label="From Date"
@@ -79,11 +91,12 @@ const DateContainer = ({ style }) => {
             }}
           />
         </Grid>
-        <Grid item xs={2}>
-          <Typography id="year-range-slider" gutterBottom>
+        <Grid item xs={4} >
+          <Typography id="year-range-slider" gutterBottom >
             Year
           </Typography>
           <Slider
+            style={{ width: "90%" }}
             min={1900}
             max={new Date().getFullYear()}
             value={yearRange}
@@ -92,11 +105,12 @@ const DateContainer = ({ style }) => {
             aria-labelledby="range-slider"
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <Typography id="month-range-slider" gutterBottom>
             Month
           </Typography>
           <Slider
+            style={{ width: "90%" }}
             min={0}
             max={11}
             value={monthRange}
@@ -106,7 +120,7 @@ const DateContainer = ({ style }) => {
             valueLabelFormat={getMonthName}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <TextField
             id="endDate"
             label="To Date"
