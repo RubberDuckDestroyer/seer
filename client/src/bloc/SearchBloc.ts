@@ -5,6 +5,7 @@ import Enum from "../libs/enums/Enum";
 import Bindable from "../local-libs/data/Bindable";
 import { FilterCategoryEnum } from "../libs/enums/FilterCategoryType";
 import { SortEnum } from "../libs/enums/SortType";
+import DateUtils from "../libs/DateUtils";
 
 export class SearchFilterInfo {
 
@@ -50,8 +51,8 @@ export default class SearchBloc extends BaseBloc {
 
     constructor() {
         super();
-        this.minDate = new Bindable<String>(new Date().toString());
-        this.maxDate = new Bindable<String>(new Date().toString());
+        this.minDate = new Bindable<String>(DateUtils.toUTC(new Date(1900, 1, 1)).toString());
+        this.maxDate = new Bindable<String>(DateUtils.toUTC(new Date(new Date().getUTCFullYear(), 12, 1)).toString());
         this.filters = new Bindable<SearchFilterInfo[]>(new Array<SearchFilterInfo>());
         this.sort = new SearchSortInfo();
 

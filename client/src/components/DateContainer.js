@@ -7,9 +7,12 @@ import {
   Typography,
   makeStyles
 } from "@material-ui/core";
+import moment from "moment";
+
 import AppContext from "../AppContext";
 import SearchBloc from "../bloc/SearchBloc";
-
+import { useBindable } from "../local-libs/data/Bindable";
+import DateUtils from "../libs/DateUtils";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -24,51 +27,51 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function getFormattedDate(date) {
+  return moment(date).format("YYYY-MM-DD");
+}
+
 const DateContainer = ({ style }) => {
 
   const searchBloc = useContext(AppContext).getBloc(SearchBloc);
+  const minDate = DateUtils.toUTC(useBindable(searchBloc.minDate));
+  const maxDate = DateUtils.toUTC(useBindable(searchBloc.maxDate));
 
-  const [startDate, setStartDate] = useState(new Date().toString());
-  const [endDate, setEndDate] = useState(new Date().toString());
-  const [yearRange, setYearRange] = useState([1900, new Date().getFullYear()]);
-  const [monthRange, setMonthRange] = useState([0, 11]);
+  const minDateString = getFormattedDate(minDate);
+  const maxDateString = getFormattedDate(maxDate);
 
-  const onChangeStartDate = (e) => {
+  const onMinDateChange = (e) => {
     searchBloc.minDate.setValue(e.target.value);
-    setStartDate(e.target.value);
   };
-  const onChangeEndDate = (e) => {
+  const onMaxDateChange = (e) => {
     searchBloc.maxDate.setValue(e.target.value);
-    setEndDate(e.target.value);
   };
-  const onChangeYearRange = (e, value) => {
-    setYearRange(value);
-
-    const endDateString = new Date(`${value[1]}-0${1}-0${2}`).toISOString();
-    const startDateString = new Date(`${value[0]}-0${1}-0${2}`).toISOString();
-
-    onChangeEndDate({
-      target: { value: endDateString.slice(0, 10) }
-    });
-    onChangeStartDate({
-      target: { value: startDateString.slice(0, 10) }
-    });
+  const onYearChange = (e, value) => {
+    const [minYear, maxYear] = value;
+    if (minYear !== minDate.getUTCFullYear()) {
+      console.log(minYear);
+      minDate.setUTCFullYear(minYear);
+      console.log(getFormattedDate(minDate));
+      searchBloc.minDate.setValue(getFormattedDate(minDate));
+    }
+    if (maxYear !== maxDate.getUTCFullYear()) {
+      maxDate.setUTCFullYear(maxYear);
+      searchBloc.maxDate.setValue(getFormattedDate(maxDate));
+    }
   };
-  const onChangeMonthRange = (e, value) => {
-    setMonthRange(value);
+  const onMonthChange = (e, value) => {
+    const [minMonth, maxMonth] = value;
+    if (minMonth !== minDate.getUTCMonth()) {
+      minDate.setUTCMonth(minMonth);
+      searchBloc.minDate.setValue(getFormattedDate(minDate));
+    }
+    if (maxMonth !== maxDate.getUTCMonth()) {
+      maxDate.setUTCMonth(maxMonth);
+      searchBloc.maxDate.setValue(getFormattedDate(maxDate));
+    }
   };
 
   const classes = useStyles();
-
-  const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-
-  function getMonthName(monthNum) {
-    const shortName = monthNames[monthNum].charAt(0).toUpperCase() +
-      monthNames[monthNum].substring(1, 3);
-    return shortName;
-  }
 
   return (
     <Container
@@ -83,8 +86,8 @@ const DateContainer = ({ style }) => {
             id="startDate"
             label="From Date"
             type="date"
-            value={startDate}
-            onChange={onChangeStartDate}
+            value={minDateString}
+            onChange={onMinDateChange}
             className={classes.textField}
             InputLabelProps={{
               shrink: true,
@@ -98,9 +101,9 @@ const DateContainer = ({ style }) => {
           <Slider
             style={{ width: "90%" }}
             min={1900}
-            max={new Date().getFullYear()}
-            value={yearRange}
-            onChange={onChangeYearRange}
+            max={new Date().getUTCFullYear()}
+            value={[minDate.getUTCFullYear(), maxDate.getUTCFullYear()]}
+            onChange={onYearChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
           />
@@ -113,11 +116,11 @@ const DateContainer = ({ style }) => {
             style={{ width: "90%" }}
             min={0}
             max={11}
-            value={monthRange}
-            onChange={onChangeMonthRange}
+            value={[minDate.getUTCMonth(), maxDate.getUTCMonth()]}
+            onChange={onMonthChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
-            valueLabelFormat={getMonthName}
+            valueLabelFormat={DateUtils.getMonthName}
           />
         </Grid>
         <Grid item xs={2}>
@@ -125,8 +128,8 @@ const DateContainer = ({ style }) => {
             id="endDate"
             label="To Date"
             type="date"
-            value={endDate}
-            onChange={onChangeEndDate}
+            value={maxDateString}
+            onChange={onMaxDateChange}
             className={classes.textField}
             InputLabelProps={{
               shrink: true,
