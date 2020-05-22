@@ -87,6 +87,7 @@ const FilterContainer = ({ style, searchFilter }) => {
                 className={classes.selectionItem}
                 variant="standard"
                 label="Value"
+                type={category.valueType.isNumeric ? "number" : "text"}
                 value={value}
                 onChange={onChangeValue}
                 error={false}
