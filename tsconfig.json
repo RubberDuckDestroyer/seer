@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es6",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "lib": [
+            "esnext"
+        ],
+        "declaration": false,
+        "outDir": "src/ts-out"
+    },
+    "include": [
+        "src"
+    ],
+    "typeAcquisition": {
+        "enable": true
+    }
+}

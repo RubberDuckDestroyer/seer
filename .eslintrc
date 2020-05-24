@@ -1,0 +1,43 @@
+{
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "brace-style": "off",
+    "comma-dangle": "off",
+    "no-var": "off",
+    "one-var": "off",
+    "no-console": "off",
+    "quotes": "off",
+    "space-before-function-paren": "off",
+    "arrow-parens": "off",
+    "no-confusing-arrow": "off",
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off",
+    "react/no-unescaped-entities": "off",
+    "import/prefer-default-export": "off",
+    "prefer-destructuring": "off",
+    "keyword-spacing": "off",
+    "indent": "off",
+    "no-plusplus": "off",
+    "arrow-body-style": "off",
+    "react/prop-types": "off",
+    "linebreak-style": "off",
+    "padded-blocks": "off",
+    "comma-style": "off",
+    "max-classes-per-file": "off",
+    "no-param-reassign": "off",
+    "newline-per-chained-call": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
+  }
+}
