@@ -12,10 +12,11 @@
     "install-all": "npm install && cd client && npm install && cd ../",
     "copy-shared-lib": "rm -rf ./client/src/libs && cp -R ./src/libs ./client/src/libs",
     "pretest": "npm run copy-shared-lib && eslint --ignore-path .eslintignore .",
-    "test": "NODE_ENV=test mocha --require \"src/tests/babel-register.js\" --require @babel/register \"src\" --recursive --exit",
+    "test": "NODE_ENV=test mocha --require \"src/tests/babel-register.js\" --require @babel/register \"src\" --recursive --exit && npm run build-ts-test",
     "prebuild": "npm run copy-shared-lib && rm -rf ./build",
-    "build": "babel -d ./build ./src",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm install --prefix client && npm run build --prefix client"
+    "build": "babel -d ./build ./src --extensions '.js,.jsx,.ts,.tsx'",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm install --prefix client && npm run build --prefix client",
+    "build-ts-test": "tsc && rm -rf ./src/ts-out"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.9.6",
+    "@types/node": "^14.0.5",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "bibtex-parse": "^2.1.0",
