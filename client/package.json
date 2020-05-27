@@ -23,7 +23,8 @@
   "scripts": {
     "start": "cd ../ && npm run copy-shared-lib && cd client && react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "CI=true react-scripts test --testPathIgnorePatterns=src/libs",
+    "test-watch": "react-scripts test"
   },
   "browserslist": {
     "production": [
