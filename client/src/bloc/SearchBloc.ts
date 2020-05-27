@@ -6,6 +6,8 @@ import Bindable from "../local-libs/data/Bindable";
 import { FilterCategoryEnum } from "../libs/enums/FilterCategoryType";
 import { SortEnum } from "../libs/enums/SortType";
 import DateUtils from "../libs/DateUtils";
+import { FilterJointEnum } from '../libs/enums/FilterJointType';
+import FilterJointType from '../libs/enums/FilterJointType';
 
 export class SearchFilterInfo {
 
@@ -30,6 +32,15 @@ export class SearchFilterInfo {
     }
 }
 
+export class SearchJointInfo {
+
+    joint: Bindable<FilterJointEnum>;
+
+    constructor() {
+        this.joint = new Bindable<FilterJointEnum>(FilterJointType.and);
+    }
+}
+
 export class SearchSortInfo {
 
     sort: Bindable<SortEnum>;
@@ -46,6 +57,7 @@ export default class SearchBloc extends BaseBloc {
     minDate: Bindable<String>;
     maxDate: Bindable<String>;
     filters: Bindable<SearchFilterInfo[]>;
+    joints: Bindable<SearchJointInfo[]>;
     sort: SearchSortInfo;
 
 
@@ -54,14 +66,50 @@ export default class SearchBloc extends BaseBloc {
         this.minDate = new Bindable<String>(DateUtils.toUTC(new Date(1900, 1, 1)).toString());
         this.maxDate = new Bindable<String>(DateUtils.toUTC(new Date(new Date().getUTCFullYear(), 12, 1)).toString());
         this.filters = new Bindable<SearchFilterInfo[]>(new Array<SearchFilterInfo>());
+        this.joints = new Bindable<SearchJointInfo[]>(new Array<SearchJointInfo>());
         this.sort = new SearchSortInfo();
 
         this.addFilter();
     }
 
+    /**
+     * Adds a new filter and a joint.
+     */
     addFilter() {
-        const newInfo = new SearchFilterInfo();
-        this.filters.getValue().push(newInfo);
+        this.filters.getValue().push(new SearchFilterInfo());
         this.filters.trigger();
+
+        if (this.filters.getValue().length > 1) {
+            this.joints.getValue().push(new SearchJointInfo());
+            this.joints.trigger();
+        }
+    }
+
+    /**
+     * Removes the specified filter.
+     */
+    removeFilter(filter: SearchFilterInfo) {
+        const filters = this.filters.getValue();
+        const joints = this.joints.getValue();
+
+        const filterIndex = filters.indexOf(filter);
+        if (filterIndex >= 0 && filterIndex < filters.length) {
+            filters.splice(filterIndex, 1);
+            joints.splice(Math.min(filterIndex, joints.length), 1);
+            
+            this.filters.trigger();
+            this.joints.trigger();
+        }
+    }
+
+    /**
+     * Removes all filters and reverts to initial state.
+     */
+    resetFilters() {
+        this.filters.getValue().length = 0;
+        this.joints.getValue().length = 0;
+
+        this.addFilter();
+        this.joints.trigger();
     }
 }
