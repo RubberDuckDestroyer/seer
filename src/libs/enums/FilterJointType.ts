@@ -1,13 +1,20 @@
 import Enum from "./Enum";
 
+type OperationHandler = (query: any, x: any, y: any) => any;
+
+interface FilterJointParam {
+    name: String,
+    operation: OperationHandler
+}
+
 export class FilterJointEnum extends Enum {
 
-    operation: (query: any, x: any, y: any) => any;
+    operation: OperationHandler;
 
 
-    constructor({ name, operation }) {
-        super(name);
-        this.operation = operation;
+    constructor(param: FilterJointParam) {
+        super(param.name);
+        this.operation = param.operation;
     }
 
     /**
