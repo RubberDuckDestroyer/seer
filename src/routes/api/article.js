@@ -39,9 +39,7 @@ router.post("/", async (req, res) => {
             sortOption["submission.bibliography.TITLE"] = 1;
         }
 
-        // TODO: Get back to $and and $or joining when the PO gives an answer.
         const result = await Article.find(query).sort(sortOption);
-
         res.json(new ApiResponse({
             isSuccess: true,
             data: result

@@ -44,8 +44,8 @@ const FilterJointType = {
         name: "NOT AND",
         operation: (query: any, x: any, y: any) => {
             query.$or = [
-                { $not: x },
-                { $not: y }
+                { $nor: [x] },
+                { $nor: [y] }
             ];
             return query;
         }
