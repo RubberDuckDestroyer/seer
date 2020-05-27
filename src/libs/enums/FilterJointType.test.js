@@ -12,7 +12,7 @@ describe("Tests FilterJointType", () => {
 
         expect(and.$and).to.eql([0, 1]);
         expect(or.$or).to.eql([0, 1]);
-        expect(notAnd.$or).to.eql([{ $not: 0 }, { $not: 1 }]);
+        expect(notAnd.$or).to.eql([{ $nor: [0] }, { $nor: [1] }]);
         expect(notOr.$nor).to.eql([0, 1]);
     });
 });

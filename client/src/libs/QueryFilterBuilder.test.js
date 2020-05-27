@@ -108,12 +108,12 @@ describe("Tests query filter building", () => {
                             // NOT AND joint
                             $or: [
                                 {
-                                    $not: {
+                                    $nor: [{
                                         methodologyType: "Waterfall"
-                                    }
+                                    }]
                                 },
                                 {
-                                    $not: {
+                                    $nor: [{
                                         // NOT OR joint
                                         $nor: [
                                             {
@@ -129,7 +129,7 @@ describe("Tests query filter building", () => {
                                                 }
                                             }
                                         ]
-                                    }
+                                    }]
                                 }
                             ]
                         }
