@@ -14,20 +14,13 @@ router.post("/", async (req, res) => {
     try {
         const {
             filters,
+            joints,
             dates,
             sort
         } = req.body;
 
         // Build query filter.
-        const query = {};
-        filters.forEach(f => {
-            if (typeof (f) === "string") {
-                // TODO: This is either AND or OR.
-            }
-            else {
-                query[f.category] = QueryFilterBuilder.buildForQuery(f);
-            }
-        });
+        const query = QueryFilterBuilder.build(filters, joints);
 
         // Apply date filtering.
         if (Array.isArray(dates) && dates.length === 2) {
