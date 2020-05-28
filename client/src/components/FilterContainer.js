@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Button,
   Container,
   Select,
   MenuItem,
@@ -24,7 +25,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FilterContainer = ({ style, searchFilter }) => {
+const FilterContainer = ({
+  style,
+  searchFilter,
+  onPlusButton = () => { },
+  onMinusButton = () => { },
+}) => {
 
   const category = useBindable(searchFilter.category);
   const condition = useBindable(searchFilter.condition);
@@ -67,7 +73,7 @@ const FilterContainer = ({ style, searchFilter }) => {
             }
           </Select>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={2}>
           <Select
             className={classes.selectionItem}
             value={condition}
@@ -111,8 +117,12 @@ const FilterContainer = ({ style, searchFilter }) => {
             )
           }
         </Grid>
-      </Grid>
-    </Container>
+        <Grid item xs={2}>
+          <Button variant="contained" color="primary" onClick={onPlusButton} data-testid="filterPlus" id="filterPlus">+</Button>
+          <Button variant="contained" color="secondary" onClick={onMinusButton} data-testid="filterMinus" id="filterMinus">-</Button>
+        </Grid>
+      </Grid >
+    </Container >
   );
 };
 export default FilterContainer;
