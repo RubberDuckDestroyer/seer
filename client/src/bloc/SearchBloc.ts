@@ -89,6 +89,9 @@ export default class SearchBloc extends BaseBloc {
      * Removes the specified filter.
      */
     removeFilter(filter: SearchFilterInfo) {
+        if (!this.canRemoveFilter())
+            return;
+
         const filters = this.filters.getValue();
         const joints = this.joints.getValue();
 
@@ -101,6 +104,16 @@ export default class SearchBloc extends BaseBloc {
             this.joints.trigger();
         }
     }
+
+    /**
+     * Returns the number of filters currently registered.
+     */
+    getFilterCount() { return this.filters.getValue().length; }
+
+    /**
+     * Returns whether a filter can be removed.
+     */
+    canRemoveFilter() { return this.filters.getValue().length > 1; }
 
     /**
      * Removes all filters and reverts to initial state.

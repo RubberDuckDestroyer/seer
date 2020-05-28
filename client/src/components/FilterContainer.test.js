@@ -1,6 +1,5 @@
 import FilterContainer from "./FilterContainer";
 import { render } from "@testing-library/react";
-import { Button } from "@material-ui/core";
 import React from "react";
 import { SearchFilterInfo } from "../bloc/SearchBloc";
 import sinon from "sinon"
