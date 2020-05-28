@@ -6,6 +6,8 @@ import {
     Grid,
     MenuItem
 } from "@material-ui/core";
+import { useBindable } from "../local-libs/data/Bindable";
+import FilterJointType from "../libs/enums/FilterJointType";
 
 const useStyles = makeStyles(() => ({
     gridContainer: {
@@ -18,10 +20,16 @@ const useStyles = makeStyles(() => ({
 
 const ConditionContainer = ({
     style,
+    jointFilter
 }) => {
 
-    const category = "CLICK ME";
+    const joint = useBindable(jointFilter.joint);
+
     const classes = useStyles();
+
+    const onJointChange = (e) => {
+      jointFilter.joint.setValue(e.target.value);
+    };
 
     return (
         <Container
@@ -33,15 +41,19 @@ const ConditionContainer = ({
           <Grid className={classes.gridContainer} container spacing={1}>
             <Select
               className={classes.selectionItem}
-              value={category}
+              value={joint}
               data-testid="condition"
               id="condition"
+              onChange={onJointChange}
             >
-                <MenuItem>CLICK ME</MenuItem>
+              {
+                Object.values(FilterJointType).map(t => (
+                  <MenuItem key={t.name} value={t}>{t.name}</MenuItem>
+                ))
+              }
             </Select>
           </Grid>
         </Container>
-    )
+    );
 };
-
 export default ConditionContainer;

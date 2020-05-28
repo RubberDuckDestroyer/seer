@@ -11,6 +11,7 @@ import SearchResultBloc from "../bloc/SearchResultBloc";
 import LoaderBloc from "../bloc/LoaderBloc";
 import SearchBloc from "../bloc/SearchBloc";
 import ConditionContainer from "../components/ConditionContainer";
+import { useBindable } from "../local-libs/data/Bindable";
 
 const useStyle = makeStyles(() => ({
   searchContainer: {
@@ -28,6 +29,9 @@ const SearchView = () => {
   const searchResultBloc = useContext(AppContext).getBloc(SearchResultBloc);
   const loaderBloc = useContext(AppContext).getBloc(LoaderBloc);
 
+  const searchFilters = useBindable(searchBloc.filters);
+  const searchJoints = useBindable(searchBloc.joints);
+
   const classes = useStyle();
 
   const onSearchButton = async () => {
@@ -36,20 +40,46 @@ const SearchView = () => {
     loaderBloc.hide();
   };
 
+  const onFilterPlusButton = () => {
+    searchBloc.addFilter();
+  };
+
+  const onFilterMinusButton = (filter) => {
+    searchBloc.removeFilter(filter);
+  };
+
   return (
     <Container>
-      <FilterContainer
-        style={{
-          backgroundColor: "#f88",
-        }}
-        searchFilter={searchBloc.filters.getValue()[0]}
-      />
-      <Box m={3} />
-      <ConditionContainer 
-        style={{
-          backgroundColor: "#abc",
-        }}
-      />
+      {
+        searchFilters.map((f, index) => {
+          const getFilterContainer = () => (
+            <FilterContainer
+              key={f.key}
+              style={{
+                backgroundColor: "#f88",
+              }}
+              searchFilter={f}
+              onPlusButton={() => onFilterPlusButton()}
+              onMinusButton={() => onFilterMinusButton(f)}
+            />
+          );
+
+          if(index < searchJoints.length) {
+            const joint = searchJoints[index];
+            return [
+              getFilterContainer(),
+              <ConditionContainer
+                key={joint.key}
+                style={{
+                  backgroundColor: "#abc",
+                }}
+                jointFilter={joint}
+              />
+            ];
+          }
+          return getFilterContainer();
+        })
+      }
       <Box m={3} />
       <DateContainer style={{
         backgroundColor: "#8f8",

@@ -1,10 +1,10 @@
 import FilterContainer from "./FilterContainer";
 import { render } from "@testing-library/react";
-import { Button } from "@material-ui/core";
 import React from "react";
 import { SearchFilterInfo } from "../bloc/SearchBloc";
 import sinon from "sinon"
 import { mount } from "enzyme"
+import AppContext from "../AppContext";
 
 test("Plus Button Exists", () => {
   const { queryByTestId } = render(
@@ -44,4 +44,18 @@ test("Plus Button can click", () => {
     .simulate("click");
 
   expect(spy.calledOnce).toBe(true);
+});
+
+test("Filter container has a greyed out (disabled) minus button if it is the only filter", () => {
+  const spy = sinon.spy();
+
+  const container = mount(
+    <FilterContainer style={{}} searchFilter={new SearchFilterInfo()} onMinusButton={spy} />
+  );
+  container
+    .find("#filterMinus")
+    .first("button")
+    .simulate("click");
+
+  expect(spy.called).toBe(true);
 });

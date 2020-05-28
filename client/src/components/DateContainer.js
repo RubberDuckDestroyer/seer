@@ -120,7 +120,7 @@ const DateContainer = ({ style }) => {
             onChange={onMonthChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
-            valueLabelFormat={DateUtils.getMonthName}
+            valueLabelFormat={(i) => DateUtils.getMonthName(i).substr(0, 3)}
           />
         </Grid>
         <Grid item xs={2}>
