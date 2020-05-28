@@ -10,6 +10,7 @@ import AppContext from "../AppContext";
 import SearchResultBloc from "../bloc/SearchResultBloc";
 import LoaderBloc from "../bloc/LoaderBloc";
 import SearchBloc from "../bloc/SearchBloc";
+import ConditionContainer from "../components/ConditionContainer";
 
 const useStyle = makeStyles(() => ({
   searchContainer: {
@@ -42,6 +43,12 @@ const SearchView = () => {
           backgroundColor: "#f88",
         }}
         searchFilter={searchBloc.filters.getValue()[0]}
+      />
+      <Box m={3} />
+      <ConditionContainer 
+        style={{
+          backgroundColor: "#abc",
+        }}
       />
       <Box m={3} />
       <DateContainer style={{
