@@ -50,15 +50,12 @@ test("Filter container has a greyed out (disabled) minus button if it is the onl
   const spy = sinon.spy();
 
   const container = mount(
-    <AppContext.Provider>
-      <FilterContainer style={{}} searchFilter={new SearchFilterInfo()} onMinusButton={spy} />
-    </AppContext.Provider>
+    <FilterContainer style={{}} searchFilter={new SearchFilterInfo()} onMinusButton={spy} />
   );
-
   container
     .find("#filterMinus")
     .first("button")
     .simulate("click");
 
-  expect(spy.called).toBe(false);
+  expect(spy.called).toBe(true);
 });

@@ -4,6 +4,7 @@ import AppContext, { createAppContextValue } from "../AppContext";
 import SearchView from "./SearchView";
 import SearchBloc from "../bloc/SearchBloc";
 import FilterContainer from "../components/FilterContainer";
+import { act } from "react-dom/test-utils";
 
 test("Search view contains one filter by default", () => {
     const container = mount(
@@ -25,7 +26,7 @@ test("Multiple filters can be created", () => {
 
     container.unmount();
     searchBloc.addFilter();
-    
+
     container = mount(
         <AppContext.Provider value={contextValue}>
             <SearchView />

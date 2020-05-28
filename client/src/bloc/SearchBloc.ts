@@ -8,14 +8,18 @@ import { SortEnum } from "../libs/enums/SortType";
 import DateUtils from "../libs/DateUtils";
 import { FilterJointEnum } from '../libs/enums/FilterJointType';
 import FilterJointType from '../libs/enums/FilterJointType';
+import Utils from "../libs/Utils";
 
 export class SearchFilterInfo {
 
+    key: String;
     category: Bindable<FilterCategoryEnum>;
     condition: Bindable<Enum>;
     value: Bindable<String>;
 
     constructor() {
+        this.key = Utils.createUUID();
+
         const defaultCategory = FilterCategoryType.method;
         this.category = new Bindable<FilterCategoryEnum>(defaultCategory);
         this.condition = new Bindable<Enum>(defaultCategory.valueType.conditions[0]);
@@ -76,12 +80,10 @@ export default class SearchBloc extends BaseBloc {
      * Adds a new filter and a joint.
      */
     addFilter() {
-        this.filters.getValue().push(new SearchFilterInfo());
-        this.filters.trigger();
+        this.filters.setValue([...this.filters.getValue(), new SearchFilterInfo()]);
 
         if (this.filters.getValue().length > 1) {
-            this.joints.getValue().push(new SearchJointInfo());
-            this.joints.trigger();
+            this.joints.setValue([...this.joints.getValue(), new SearchJointInfo()]);
         }
     }
 
@@ -92,16 +94,16 @@ export default class SearchBloc extends BaseBloc {
         if (!this.canRemoveFilter())
             return;
 
-        const filters = this.filters.getValue();
-        const joints = this.joints.getValue();
+        const filters = [...this.filters.getValue()];
+        const joints = [...this.joints.getValue()];
 
         const filterIndex = filters.indexOf(filter);
         if (filterIndex >= 0 && filterIndex < filters.length) {
             filters.splice(filterIndex, 1);
             joints.splice(Math.min(filterIndex, joints.length), 1);
             
-            this.filters.trigger();
-            this.joints.trigger();
+            this.filters.setValue(filters);
+            this.joints.setValue(joints);
         }
     }
 
