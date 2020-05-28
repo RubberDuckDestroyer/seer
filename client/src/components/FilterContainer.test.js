@@ -4,6 +4,7 @@ import React from "react";
 import { SearchFilterInfo } from "../bloc/SearchBloc";
 import sinon from "sinon"
 import { mount } from "enzyme"
+import AppContext from "../AppContext";
 
 test("Plus Button Exists", () => {
   const { queryByTestId } = render(
@@ -43,4 +44,21 @@ test("Plus Button can click", () => {
     .simulate("click");
 
   expect(spy.calledOnce).toBe(true);
+});
+
+test("Filter container has a greyed out (disabled) minus button if it is the only filter", () => {
+  const spy = sinon.spy();
+
+  const container = mount(
+    <AppContext.Provider>
+      <FilterContainer style={{}} searchFilter={new SearchFilterInfo()} onMinusButton={spy} />
+    </AppContext.Provider>
+  );
+
+  container
+    .find("#filterMinus")
+    .first("button")
+    .simulate("click");
+
+  expect(spy.called).toBe(false);
 });
