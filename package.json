@@ -13,6 +13,7 @@
     "copy-shared-lib": "rm -rf ./client/src/libs && cp -R ./src/libs ./client/src/libs",
     "pretest": "npm run copy-shared-lib && eslint --ignore-path .eslintignore .",
     "test": "NODE_ENV=test mocha --require \"src/tests/babel-register.js\" --require @babel/register \"src\" --recursive --exit && npm run build-ts-test",
+    "test-all": "concurrently \"npm run test\" \"npm run test --prefix client\"",
     "prebuild": "npm run copy-shared-lib && rm -rf ./build",
     "build": "babel -d ./build ./src --extensions '.js,.jsx,.ts,.tsx'",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm install --prefix client && npm run build --prefix client",
