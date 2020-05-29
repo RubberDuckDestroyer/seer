@@ -9,13 +9,10 @@ import {
 import { useBindable } from "../local-libs/data/Bindable";
 import FilterJointType from "../libs/enums/FilterJointType";
 
-const useStyles = makeStyles(() => ({
-    gridContainer: {
-      padding: "auto",
-      height: "100%",
-      display: "flex",
-      alignItems: "flex-end"
-    }
+const useStyles = makeStyles((theme) => ({
+  container: {
+    margin: theme.spacing(1)
+  }
 }));
 
 const ConditionContainer = ({
@@ -23,37 +20,49 @@ const ConditionContainer = ({
     jointFilter
 }) => {
 
-    const joint = useBindable(jointFilter.joint);
+  const joint = useBindable(jointFilter.joint);
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const onJointChange = (e) => {
-      jointFilter.joint.setValue(e.target.value);
-    };
+  const onJointChange = (e) => {
+    jointFilter.joint.setValue(e.target.value);
+  };
 
-    return (
-        <Container
-          style={{
-            ...style,
-            borderRadius: "10px",
-          }}
-        >
-          <Grid className={classes.gridContainer} container spacing={1}>
-            <Select
-              className={classes.selectionItem}
-              value={joint}
-              data-testid="condition"
-              id="condition"
-              onChange={onJointChange}
-            >
-              {
-                Object.values(FilterJointType).map(t => (
-                  <MenuItem key={t.name} value={t}>{t.name}</MenuItem>
-                ))
-              }
-            </Select>
-          </Grid>
-        </Container>
-    );
+  return (
+    <Container
+      style={{
+        ...style,
+      }}
+    >
+      <Grid
+        container
+        spacing={1}
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item xs={8} sm={6} md={4} style={{
+          flexDirection: "row",
+          display: "flex",
+          justifyContent: "center"
+        }}>
+          <Select
+            value={joint}
+            data-testid="condition"
+            id="condition"
+            onChange={onJointChange}
+            style={{
+              width: "100%"
+            }}
+          >
+            {
+              Object.values(FilterJointType).map(t => (
+                <MenuItem key={t.name} value={t}>{t.name}</MenuItem>
+              ))
+            }
+          </Select>
+        </Grid>
+      </Grid>
+    </Container>
+  );
 };
 export default ConditionContainer;

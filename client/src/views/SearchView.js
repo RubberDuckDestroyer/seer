@@ -71,6 +71,9 @@ const SearchView = () => {
               <ConditionContainer
                 key={joint.key}
                 jointFilter={joint}
+                style={{
+                  margin: "0.5rem",
+                }}
               />
             ];
           }
