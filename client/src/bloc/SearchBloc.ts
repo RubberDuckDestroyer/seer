@@ -43,7 +43,7 @@ export class SearchJointInfo {
 
     constructor() {
         this.key = Utils.createUUID();
-        this.joint = new Bindable<FilterJointEnum>(FilterJointType.and);
+        this.joint = new Bindable<FilterJointEnum>(FilterJointType.or);
     }
 }
 
