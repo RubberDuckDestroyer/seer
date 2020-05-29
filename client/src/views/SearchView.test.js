@@ -25,7 +25,9 @@ test("Multiple filters can be created", () => {
     expect(container.find(FilterContainer).length).toBe(1);
 
     container.unmount();
-    searchBloc.addFilter();
+    act(() => {
+        searchBloc.addFilter();
+    });
 
     container = mount(
         <AppContext.Provider value={contextValue}>
