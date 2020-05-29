@@ -72,7 +72,7 @@ const SearchView = () => {
                 key={joint.key}
                 jointFilter={joint}
                 style={{
-                  margin: "0.5rem",
+                  margin: "0.5rem 0",
                 }}
               />
             ];
@@ -82,8 +82,7 @@ const SearchView = () => {
       }
       <Box m={3} />
       <DateContainer style={{
-        backgroundColor: "#8f8",
-        padding: "10px"
+        margin: "0.5rem 0",
       }} />
       <Box m={2} />
       <Box className={classes.searchContainer}>

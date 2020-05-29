@@ -5,7 +5,8 @@ import {
   Grid,
   Slider,
   Typography,
-  makeStyles
+  makeStyles,
+  Hidden
 } from "@material-ui/core";
 import moment from "moment";
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   selectionItem: {
     width: "100%",
     marginBottom: theme.spacing(1)
-  }
+  },
 }));
 
 function getFormattedDate(date) {
@@ -43,15 +44,15 @@ const DateContainer = ({ style }) => {
   const onMinDateChange = (e) => {
     searchBloc.minDate.setValue(e.target.value);
   };
+
   const onMaxDateChange = (e) => {
     searchBloc.maxDate.setValue(e.target.value);
   };
+
   const onYearChange = (e, value) => {
     const [minYear, maxYear] = value;
     if (minYear !== minDate.getUTCFullYear()) {
-      console.log(minYear);
       minDate.setUTCFullYear(minYear);
-      console.log(getFormattedDate(minDate));
       searchBloc.minDate.setValue(getFormattedDate(minDate));
     }
     if (maxYear !== maxDate.getUTCFullYear()) {
@@ -59,6 +60,7 @@ const DateContainer = ({ style }) => {
       searchBloc.maxDate.setValue(getFormattedDate(maxDate));
     }
   };
+
   const onMonthChange = (e, value) => {
     const [minMonth, maxMonth] = value;
     if (minMonth !== minDate.getUTCMonth()) {
@@ -81,56 +83,58 @@ const DateContainer = ({ style }) => {
       }}
     >
       <Grid className={classes.gridContainer} container spacing={1}>
-        <Grid item xs={2}>
+        <Grid item xs={6} md={3} lg={2}>
           <TextField
             id="startDate"
             label="From Date"
             type="date"
             value={minDateString}
             onChange={onMinDateChange}
-            className={classes.textField}
+            className={classes.selectionItem}
             InputLabelProps={{
               shrink: true,
             }}
           />
         </Grid>
-        <Grid item xs={4} >
-          <Typography id="year-range-slider" gutterBottom >
-            Year
-          </Typography>
-          <Slider
-            style={{ width: "90%" }}
-            min={1900}
-            max={new Date().getUTCFullYear()}
-            value={[minDate.getUTCFullYear(), maxDate.getUTCFullYear()]}
-            onChange={onYearChange}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <Typography id="month-range-slider" gutterBottom>
-            Month
-          </Typography>
-          <Slider
-            style={{ width: "90%" }}
-            min={0}
-            max={11}
-            value={[minDate.getUTCMonth(), maxDate.getUTCMonth()]}
-            onChange={onMonthChange}
-            valueLabelDisplay="auto"
-            aria-labelledby="range-slider"
-            valueLabelFormat={(i) => DateUtils.getMonthName(i).substr(0, 3)}
-          />
-        </Grid>
-        <Grid item xs={2}>
+        <Hidden smDown>
+          <Grid item md={3} lg={4}>
+            <Typography id="year-range-slider" gutterBottom >
+              Year
+            </Typography>
+            <Slider
+              style={{ width: "90%", marginLeft: "5%" }}
+              min={1900}
+              max={new Date().getUTCFullYear()}
+              value={[minDate.getUTCFullYear(), maxDate.getUTCFullYear()]}
+              onChange={onYearChange}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+            />
+          </Grid>
+          <Grid item md={3} lg={4}>
+            <Typography id="month-range-slider" gutterBottom>
+              Month
+            </Typography>
+            <Slider
+              style={{ width: "90%", marginLeft: "5%" }}
+              min={0}
+              max={11}
+              value={[minDate.getUTCMonth(), maxDate.getUTCMonth()]}
+              onChange={onMonthChange}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              valueLabelFormat={(i) => DateUtils.getMonthName(i).substr(0, 3)}
+            />
+          </Grid>
+        </Hidden>
+        <Grid item xs={6} md={3} lg={2}>
           <TextField
             id="endDate"
             label="To Date"
             type="date"
             value={maxDateString}
             onChange={onMaxDateChange}
-            className={classes.textField}
+            className={classes.selectionItem}
             InputLabelProps={{
               shrink: true,
             }}
