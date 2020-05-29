@@ -2,18 +2,11 @@ import React from "react";
 import {
     Container,
     Select,
-    makeStyles,
     Grid,
     MenuItem
 } from "@material-ui/core";
 import { useBindable } from "../local-libs/data/Bindable";
 import FilterJointType from "../libs/enums/FilterJointType";
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    margin: theme.spacing(1)
-  }
-}));
 
 const ConditionContainer = ({
     style,
@@ -21,8 +14,6 @@ const ConditionContainer = ({
 }) => {
 
   const joint = useBindable(jointFilter.joint);
-
-  const classes = useStyles();
 
   const onJointChange = (e) => {
     jointFilter.joint.setValue(e.target.value);
