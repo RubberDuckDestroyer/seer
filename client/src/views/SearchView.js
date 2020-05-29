@@ -55,10 +55,10 @@ const SearchView = () => {
           const getFilterContainer = () => (
             <FilterContainer
               key={f.key}
-              style={{
-                backgroundColor: "#f88",
-              }}
               searchFilter={f}
+              style={{
+                minHeight: "3rem"
+              }}
               onPlusButton={() => onFilterPlusButton()}
               onMinusButton={() => onFilterMinusButton(f)}
             />
@@ -70,9 +70,6 @@ const SearchView = () => {
               getFilterContainer(),
               <ConditionContainer
                 key={joint.key}
-                style={{
-                  backgroundColor: "#abc",
-                }}
                 jointFilter={joint}
               />
             ];
