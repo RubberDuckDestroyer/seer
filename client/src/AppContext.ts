@@ -8,11 +8,12 @@ const search = new SearchBloc();
 const searchResult = new SearchResultBloc(search);
 const loader = new LoaderBloc();
 
-export const AppContextValue = new BlocContextValue({
+export const createAppContextValue = () => (new BlocContextValue({
     search,
     searchResult,
     loader
-});
+}));
 
+export const AppContextValue = createAppContextValue();
 const AppContext = createContext(AppContextValue);
 export default AppContext;

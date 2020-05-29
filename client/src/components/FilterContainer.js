@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Button,
   Container,
   Select,
   MenuItem,
@@ -18,13 +19,30 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "flex-end"
   },
+  gridItem: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start"
+  },
   selectionItem: {
     width: "100%",
-    marginBottom: theme.spacing(1)
+    padding: 0,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  actionButton: {
+    width: "50%",
+    margin: theme.spacing(1),
   }
 }));
 
-const FilterContainer = ({ style, searchFilter }) => {
+const FilterContainer = ({
+  style,
+  searchFilter,
+  onPlusButton = () => { },
+  onMinusButton = () => { },
+}) => {
 
   const category = useBindable(searchFilter.category);
   const condition = useBindable(searchFilter.condition);
@@ -49,10 +67,12 @@ const FilterContainer = ({ style, searchFilter }) => {
       style={{
         ...style,
         borderRadius: "10px",
+        border: "1px solid #ccc",
+        backgroundColor: "#eee"
       }}
     >
       <Grid className={classes.gridContainer} container spacing={1}>
-        <Grid item xs={4}>
+        <Grid item xs={4} sm={3} lg={4} className={classes.gridItem}>
           <Select
             className={classes.selectionItem}
             value={category}
@@ -67,7 +87,7 @@ const FilterContainer = ({ style, searchFilter }) => {
             }
           </Select>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} sm={3} lg={2} className={classes.gridItem}>
           <Select
             className={classes.selectionItem}
             value={condition}
@@ -80,18 +100,23 @@ const FilterContainer = ({ style, searchFilter }) => {
             }
           </Select>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} sm={3} lg={4} className={classes.gridItem}>
           {
             isTextInput && (
               <TextField
                 className={classes.selectionItem}
                 variant="standard"
-                label="Value"
                 type={category.valueType.isNumeric ? "number" : "text"}
                 value={value}
                 onChange={onChangeValue}
                 error={false}
                 helperText={""}
+                InputLabelProps={{
+                  shrink: false,
+                }}
+                style={{
+                  marginTop: 0
+                }}
               />
             )
           }
@@ -111,8 +136,30 @@ const FilterContainer = ({ style, searchFilter }) => {
             )
           }
         </Grid>
-      </Grid>
-    </Container>
+        <Grid item xs={12} sm={3} lg={2} className={classes.gridItem}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={onMinusButton}
+            data-testid="filterMinus"
+            id="filterMinus"
+            className={classes.actionButton}
+          >
+            -
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={onPlusButton}
+            data-testid="filterPlus"
+            id="filterPlus"
+            className={classes.actionButton}
+          >
+            +
+          </Button>
+        </Grid>
+      </Grid >
+    </Container >
   );
 };
 export default FilterContainer;

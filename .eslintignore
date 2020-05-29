@@ -1,6 +1,8 @@
 tests
 *.example.js
 *.example.ts
+*.test.js
+*.test.ts
 
 # Redundant copy from .gitignore due to limitations of eslint --ignore-path argument
 # https://github.com/eslint/eslint/issues/9794

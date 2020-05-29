@@ -10,6 +10,8 @@ import AppContext from "../AppContext";
 import SearchResultBloc from "../bloc/SearchResultBloc";
 import LoaderBloc from "../bloc/LoaderBloc";
 import SearchBloc from "../bloc/SearchBloc";
+import ConditionContainer from "../components/ConditionContainer";
+import { useBindable } from "../local-libs/data/Bindable";
 
 const useStyle = makeStyles(() => ({
   searchContainer: {
@@ -27,6 +29,9 @@ const SearchView = () => {
   const searchResultBloc = useContext(AppContext).getBloc(SearchResultBloc);
   const loaderBloc = useContext(AppContext).getBloc(LoaderBloc);
 
+  const searchFilters = useBindable(searchBloc.filters);
+  const searchJoints = useBindable(searchBloc.joints);
+
   const classes = useStyle();
 
   const onSearchButton = async () => {
@@ -35,18 +40,49 @@ const SearchView = () => {
     loaderBloc.hide();
   };
 
+  const onFilterPlusButton = () => {
+    searchBloc.addFilter();
+  };
+
+  const onFilterMinusButton = (filter) => {
+    searchBloc.removeFilter(filter);
+  };
+
   return (
     <Container>
-      <FilterContainer
-        style={{
-          backgroundColor: "#f88",
-        }}
-        searchFilter={searchBloc.filters.getValue()[0]}
-      />
+      {
+        searchFilters.map((f, index) => {
+          const getFilterContainer = () => (
+            <FilterContainer
+              key={f.key}
+              searchFilter={f}
+              style={{
+                minHeight: "3rem"
+              }}
+              onPlusButton={() => onFilterPlusButton()}
+              onMinusButton={() => onFilterMinusButton(f)}
+            />
+          );
+
+          if(index < searchJoints.length) {
+            const joint = searchJoints[index];
+            return [
+              getFilterContainer(),
+              <ConditionContainer
+                key={joint.key}
+                jointFilter={joint}
+                style={{
+                  margin: "0.5rem 0",
+                }}
+              />
+            ];
+          }
+          return getFilterContainer();
+        })
+      }
       <Box m={3} />
       <DateContainer style={{
-        backgroundColor: "#8f8",
-        padding: "10px"
+        margin: "0.5rem 0",
       }} />
       <Box m={2} />
       <Box className={classes.searchContainer}>

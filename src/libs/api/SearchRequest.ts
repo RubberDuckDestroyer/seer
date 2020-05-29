@@ -14,8 +14,9 @@ interface ISearchSort {
     order: number
 }
 
-interface ISearchRequestParam {
+export interface ISearchRequestParam {
     filters: ISearchFilter[],
+    joints: String[],
     dates: [
         Date,
         Date
@@ -55,6 +56,7 @@ export default class SearchRequest implements IRequestT<SearchResponse> {
         try {
             const body = {
                 filters: this.params.filters,
+                joints: this.params.joints,
                 dates: [
                     this.params.dates[0].toISOString(),
                     this.params.dates[1].toISOString()

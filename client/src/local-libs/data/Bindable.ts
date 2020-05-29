@@ -56,7 +56,7 @@ export default class Bindable<T> {
     unsubscribe(callbackId: number) {
         for (let i = 0; i < this._listeners.length; i++) {
             if (this._listeners[i].id === callbackId) {
-                this._listeners.splice(i);
+                this._listeners.splice(i, 1);
                 return;
             }
         }

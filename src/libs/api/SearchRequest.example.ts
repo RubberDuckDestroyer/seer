@@ -22,6 +22,7 @@ const createRequest = () => {
                 value: exampleValue.name
             }
         ],
+        joints: [],
         dates: [
             new Date("2001-07-31"),
             new Date("2001-08-01")
