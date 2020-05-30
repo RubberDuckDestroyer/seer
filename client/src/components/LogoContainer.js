@@ -13,7 +13,7 @@ const LogoContainer = () => {
       padding: '1rem',
     }}>
       <Button onClick={() => { window.location.replace("\\"); }}>
-        <img src={logo} alt="missing image" style={{ height: '120px' }} />
+        <img src={logo} alt="Failed to load" style={{ height: '120px' }} />
       </Button>
     </Container>
   );
