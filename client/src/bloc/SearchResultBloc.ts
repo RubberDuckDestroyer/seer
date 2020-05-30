@@ -5,6 +5,7 @@ import SearchBloc from "./SearchBloc";
 import DateUtils from "../libs/DateUtils";
 import BaseBloc from '../local-libs/bloc/BaseBloc';
 import { ISearchRequestParam } from '../libs/api/SearchRequest';
+import StatusType from '../libs/enums/StatusType';
 
 export default class SearchResultBloc extends BaseBloc {
 
@@ -46,7 +47,8 @@ export default class SearchResultBloc extends BaseBloc {
             sort: {
                 key: this.searchBloc.columnInfo.getSortingColumn().dbField,
                 order: this.searchBloc.columnInfo.isAscending.getValue() ? 1 : -1
-            }
+            },
+            status: StatusType.complete.name
         };
     }
 

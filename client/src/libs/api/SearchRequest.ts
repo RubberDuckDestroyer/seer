@@ -21,7 +21,8 @@ export interface ISearchRequestParam {
         Date,
         Date
     ],
-    sort: ISearchSort
+    sort: ISearchSort,
+    status?: String
 }
 
 class SearchResponse extends ApiResponse {
@@ -61,7 +62,8 @@ export default class SearchRequest implements IRequestT<SearchResponse> {
                     this.params.dates[0].toISOString(),
                     this.params.dates[1].toISOString()
                 ],
-                sort: this.params.sort
+                sort: this.params.sort,
+                status: this.params.status
             };
             return new SearchResponse(await axios.post(getUrl("/api/article"), body));
         }
