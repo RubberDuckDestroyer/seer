@@ -1,5 +1,5 @@
 import SearchBloc, { SearchFilterInfo } from "./SearchBloc";
-import SortType from "../libs/enums/SortType";
+import ColumnType from "../libs/enums/ColumnType";
 
 test("Change date range", () => {
     const bloc = new SearchBloc();
@@ -33,11 +33,11 @@ test("Validating default search result columns", () => {
     expect(columns.length).toBe(5);
 
     const defaultColumns = [
-        SortType.result,
-        SortType.publicationDate,
-        SortType.title,
-        SortType.author,
-        SortType.methodologyType,
+        ColumnType.result,
+        ColumnType.publicationDate,
+        ColumnType.title,
+        ColumnType.author,
+        ColumnType.methodologyType,
     ];
     defaultColumns.forEach((c, index) => expect(columns[index]).toBe(c));
 });
@@ -46,21 +46,21 @@ test("Changing result columns", () => {
     const bloc = new SearchBloc();
     const columnInfo = bloc.columnInfo;
 
-    columnInfo.setColumn(0, SortType.methodType);
-    expect(columnInfo.columns.getValue()[0]).toBe(SortType.methodType);
+    columnInfo.setColumn(0, ColumnType.methodType);
+    expect(columnInfo.columns.getValue()[0]).toBe(ColumnType.methodType);
 });
 
 test("Preventing multiple columns having the same column type", () => {
     const bloc = new SearchBloc();
     const columnInfo = bloc.columnInfo;
 
-    columnInfo.setColumn(0, SortType.methodType);
-    expect(columnInfo.columns.getValue()[0]).toBe(SortType.methodType);
+    columnInfo.setColumn(0, ColumnType.methodType);
+    expect(columnInfo.columns.getValue()[0]).toBe(ColumnType.methodType);
 
-    expect(columnInfo.columns.getValue()[1]).toBe(SortType.publicationDate);
+    expect(columnInfo.columns.getValue()[1]).toBe(ColumnType.publicationDate);
     // Even if the same column is specified, it shouldn't affect the actual data.
-    columnInfo.setColumn(1, SortType.methodType);
-    expect(columnInfo.columns.getValue()[1]).toBe(SortType.publicationDate);
+    columnInfo.setColumn(1, ColumnType.methodType);
+    expect(columnInfo.columns.getValue()[1]).toBe(ColumnType.publicationDate);
 });
 
 test("Validating default sort method", () => {

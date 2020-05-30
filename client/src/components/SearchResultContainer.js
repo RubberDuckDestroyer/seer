@@ -18,7 +18,7 @@ import AppContext from "../AppContext";
 import SearchResultBloc from "../bloc/SearchResultBloc";
 import { useBindable } from "../local-libs/data/Bindable";
 import SearchBloc from "../bloc/SearchBloc";
-import SortType from "../libs/enums/SortType";
+import ColumnType from "../libs/enums/ColumnType";
 import Enum from "../libs/enums/Enum";
 import LoaderBloc from "../bloc/LoaderBloc";
 
@@ -93,7 +93,7 @@ const SearchResultContainer = () => {
                                                 onChange={(e) => onColumnChange(colIndex, e.target.value)}
                                             >
                                                 {
-                                                    Object.values(SortType).map(type => (
+                                                    Object.values(ColumnType).map(type => (
                                                         <MenuItem key={type.name} value={type}>{type.name}</MenuItem>
                                                     ))
                                                 }

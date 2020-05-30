@@ -6,8 +6,8 @@ import MethodType from "../enums/MethodType";
 import MethodologyType from "../enums/MethodologyType";
 import ParticipantType from "../enums/ParticipantType";
 import IntegrityType from "../enums/IntegrityType";
-import { SortEnum } from '../enums/SortType';
-import SortType from '../enums/SortType';
+import { ColumnEnum } from '../enums/ColumnType';
+import ColumnType from '../enums/ColumnType';
 
 export default class ArticleInfo {
 
@@ -27,24 +27,24 @@ export default class ArticleInfo {
         this.bibliography = this.submission.bibliography;
     }
 
-    getValueForColumn(column: SortEnum) {
+    getValueForColumn(column: ColumnEnum) {
         if (column === null || column === undefined) {
             console.log(`ArticleInfo.getValueForColumn - column mustn't be null or undefined!`);
             return "";
         }
         switch (column) {
-            case SortType.title: return this.getTitle();
-            case SortType.author: return this.getAuthor();
-            case SortType.journal: return this.getJournal();
-            case SortType.publicationDate: return this.getDate();
-            case SortType.publicationType: return this.getType();
-            case SortType.question: return this.getQuestion();
-            case SortType.metric: return this.getMetric();
-            case SortType.researchMethodType: return this.getResearchMethodType();
-            case SortType.methodType: return this.getMethodType();
-            case SortType.methodologyType: return this.getMethodologyType();
-            case SortType.integrity: return this.getIntegrity();
-            case SortType.result: return this.getResult();
+            case ColumnType.title: return this.getTitle();
+            case ColumnType.author: return this.getAuthor();
+            case ColumnType.journal: return this.getJournal();
+            case ColumnType.publicationDate: return this.getDate();
+            case ColumnType.publicationType: return this.getType();
+            case ColumnType.question: return this.getQuestion();
+            case ColumnType.metric: return this.getMetric();
+            case ColumnType.researchMethodType: return this.getResearchMethodType();
+            case ColumnType.methodType: return this.getMethodType();
+            case ColumnType.methodologyType: return this.getMethodologyType();
+            case ColumnType.integrity: return this.getIntegrity();
+            case ColumnType.result: return this.getResult();
         }
         console.log(`ArticleInfo.getValueForColumn - Unsupported column type: ${column.name}`);
         return "";

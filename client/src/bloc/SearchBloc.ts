@@ -1,10 +1,10 @@
 import BaseBloc from "../local-libs/bloc/BaseBloc";
 import FilterCategoryType from "../libs/enums/FilterCategoryType";
-import SortType from "../libs/enums/SortType";
+import ColumnType from "../libs/enums/ColumnType";
 import Enum from "../libs/enums/Enum";
 import Bindable from "../local-libs/data/Bindable";
 import { FilterCategoryEnum } from "../libs/enums/FilterCategoryType";
-import { SortEnum } from '../libs/enums/SortType';
+import { ColumnEnum } from '../libs/enums/ColumnType';
 import DateUtils from "../libs/DateUtils";
 import { FilterJointEnum } from '../libs/enums/FilterJointType';
 import FilterJointType from '../libs/enums/FilterJointType';
@@ -49,17 +49,17 @@ export class SearchJointInfo {
 
 export class SearchColumnInfo {
 
-    columns: Bindable<SortEnum[]>;
+    columns: Bindable<ColumnEnum[]>;
     sortingIndex: Bindable<number>;
     isAscending: Bindable<boolean>;
 
     constructor() {
-        this.columns = new Bindable<SortEnum[]>(new Array<SortEnum>(
-            SortType.result,
-            SortType.publicationDate,
-            SortType.title,
-            SortType.author,
-            SortType.methodologyType
+        this.columns = new Bindable<ColumnEnum[]>(new Array<ColumnEnum>(
+            ColumnType.result,
+            ColumnType.publicationDate,
+            ColumnType.title,
+            ColumnType.author,
+            ColumnType.methodologyType
         ));
         this.sortingIndex = new Bindable<number>(2);
         this.isAscending = new Bindable<boolean>(true);
@@ -68,7 +68,7 @@ export class SearchColumnInfo {
     /**
      * Changes the column to display at specified index.
      */
-    setColumn(index: number, type: SortEnum) {
+    setColumn(index: number, type: ColumnEnum) {
         const newColumns = [...this.columns.getValue()];
         if (!this.isColumnIndexValid(index))
             return;
@@ -93,14 +93,14 @@ export class SearchColumnInfo {
     /**
      * Returns the column type which the sorting is done for.
      */
-    getSortingColumn(): SortEnum {
+    getSortingColumn(): ColumnEnum {
         return this.columns.getValue()[this.sortingIndex.getValue()];
     }
 
     /**
      * Returns whether the specified column type has been selected.
      */
-    containsColumn(type: SortEnum) {
+    containsColumn(type: ColumnEnum) {
         const columns = this.columns.getValue();
         for (let i = 0; i < columns.length; i++) {
             if (columns[i] === type)
