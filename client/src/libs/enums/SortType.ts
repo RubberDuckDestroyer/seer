@@ -23,10 +23,11 @@ const SortType = {
     // Article data
     question: new SortEnum("Question", "question"),
     metric: new SortEnum("Metric", "metric"),
-    researchMethodTypd: new SortEnum("Research method", "researchMethodTypd"),
+    researchMethodType: new SortEnum("Research method", "researchMethodTypd"),
     methodType: new SortEnum("SE Method", "methodType"),
     methodologyType: new SortEnum("Methodology", "methodologyType"),
     integrity: new SortEnum("Integrity", "integrity"),
+    result: new SortEnum("Result", "result"),
 };
 export default SortType;
 

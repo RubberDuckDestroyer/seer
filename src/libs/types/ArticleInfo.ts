@@ -6,6 +6,8 @@ import MethodType from "../enums/MethodType";
 import MethodologyType from "../enums/MethodologyType";
 import ParticipantType from "../enums/ParticipantType";
 import IntegrityType from "../enums/IntegrityType";
+import { SortEnum } from '../enums/SortType';
+import SortType from '../enums/SortType';
 
 export default class ArticleInfo {
 
@@ -23,6 +25,29 @@ export default class ArticleInfo {
         this.rawArticle = rawArticle;
         this.submission = rawArticle.submission;
         this.bibliography = this.submission.bibliography;
+    }
+
+    getValueForColumn(column: SortEnum) {
+        if (column === null || column === undefined) {
+            console.log(`ArticleInfo.getValueForColumn - column mustn't be null or undefined!`);
+            return "";
+        }
+        switch (column) {
+            case SortType.title: return this.getTitle();
+            case SortType.author: return this.getAuthor();
+            case SortType.journal: return this.getJournal();
+            case SortType.publicationDate: return this.getDate();
+            case SortType.publicationType: return this.getType();
+            case SortType.question: return this.getQuestion();
+            case SortType.metric: return this.getMetric();
+            case SortType.researchMethodType: return this.getResearchMethodType();
+            case SortType.methodType: return this.getMethodType();
+            case SortType.methodologyType: return this.getMethodologyType();
+            case SortType.integrity: return this.getIntegrity();
+            case SortType.result: return this.getResult();
+        }
+        console.log(`ArticleInfo.getValueForColumn - Unsupported column type: ${column.name}`);
+        return "";
     }
 
     getType() { return this.bibliography.type as String; }
@@ -89,7 +114,7 @@ export default class ArticleInfo {
 
     getMetric() { return this.rawArticle.metric as String; }
 
-    getReserachMethodType() {
+    getResearchMethodType() {
         return Enum.findByName(ResearchMethodType, this.rawArticle.researchMethodType);
     }
 
