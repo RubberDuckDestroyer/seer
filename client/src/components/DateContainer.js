@@ -73,6 +73,13 @@ const DateContainer = ({ style }) => {
     }
   };
 
+  const formatDateLabel = (i) => {
+    if (i >= 0 && i <= 11) {
+      return DateUtils.getMonthName(i).substr(0, 3);
+    }
+    return "";
+  };
+
   const classes = useStyles();
 
   return (
@@ -123,7 +130,7 @@ const DateContainer = ({ style }) => {
               onChange={onMonthChange}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
-              valueLabelFormat={(i) => DateUtils.getMonthName(i).substr(0, 3)}
+              valueLabelFormat={formatDateLabel}
             />
           </Grid>
         </Hidden>
