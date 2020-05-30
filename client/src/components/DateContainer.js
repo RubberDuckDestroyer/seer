@@ -45,10 +45,16 @@ const DateContainer = ({ style }) => {
   const maxDateString = getFormattedDate(maxDate);
 
   const onMinDateChange = (e) => {
+    if (!DateUtils.isValidDate(e.target.value)) {
+      return;
+    }
     searchBloc.minDate.setValue(e.target.value);
   };
 
   const onMaxDateChange = (e) => {
+    if (!DateUtils.isValidDate(e.target.value)) {
+      return;
+    }
     searchBloc.maxDate.setValue(e.target.value);
   };
 
