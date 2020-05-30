@@ -16,11 +16,17 @@ router.post("/", async (req, res) => {
             filters,
             joints,
             dates,
-            sort
+            sort,
+            status
         } = req.body;
 
         // Build query filter.
         const query = QueryFilterBuilder.build(filters, joints);
+
+        // Apply status filtering.
+        if (typeof (status) === "string") {
+            query["submission.statusType"] = status;
+        }
 
         // Apply date filtering.
         if (Array.isArray(dates) && dates.length === 2) {
@@ -29,6 +35,7 @@ router.post("/", async (req, res) => {
                 $lte: DateUtils.toUTC(dates[1])
             };
         }
+        console.log(query);
 
         // Apply sorting.
         const sortOption = {};

@@ -6,6 +6,8 @@ import MethodType from "../enums/MethodType";
 import MethodologyType from "../enums/MethodologyType";
 import ParticipantType from "../enums/ParticipantType";
 import IntegrityType from "../enums/IntegrityType";
+import { ColumnEnum } from '../enums/ColumnType';
+import ColumnType from '../enums/ColumnType';
 
 export default class ArticleInfo {
 
@@ -25,7 +27,33 @@ export default class ArticleInfo {
         this.bibliography = this.submission.bibliography;
     }
 
+    getValueForColumn(column: ColumnEnum) {
+        if (column === null || column === undefined) {
+            console.log(`ArticleInfo.getValueForColumn - column mustn't be null or undefined!`);
+            return "";
+        }
+        switch (column) {
+            case ColumnType.title: return this.getTitle();
+            case ColumnType.author: return this.getAuthor();
+            case ColumnType.journal: return this.getJournal();
+            case ColumnType.publicationDate: return this.getDate();
+            case ColumnType.publicationType: return this.getType();
+            case ColumnType.doi: return this.getDOI();
+            case ColumnType.question: return this.getQuestion();
+            case ColumnType.metric: return this.getMetric();
+            case ColumnType.researchMethodType: return this.getResearchMethodType();
+            case ColumnType.methodType: return this.getMethodType();
+            case ColumnType.methodologyType: return this.getMethodologyType();
+            case ColumnType.integrity: return this.getIntegrity();
+            case ColumnType.result: return this.getResult();
+        }
+        console.log(`ArticleInfo.getValueForColumn - Unsupported column type: ${column.name}`);
+        return "";
+    }
+
     getType() { return this.bibliography.type as String; }
+
+    getDOI() { return this.bibliography.DOI as String; }
 
     getAuthor() { return this.bibliography.AUTHOR as String; }
 
@@ -43,7 +71,12 @@ export default class ArticleInfo {
 
     getPages() { return this.bibliography.PAGES as String; }
 
-    getDate() { return DateUtils.toUTC(this.bibliography.DATE as String); }
+    getDate() {
+        const dateString = this.bibliography.DATE;
+        if(typeof (dateString) === "string")
+            return DateUtils.toUTC(dateString);
+        return null;
+    }
 
     getCredibility() {
         if (!this.cachedCredibility) {
@@ -89,7 +122,7 @@ export default class ArticleInfo {
 
     getMetric() { return this.rawArticle.metric as String; }
 
-    getReserachMethodType() {
+    getResearchMethodType() {
         return Enum.findByName(ResearchMethodType, this.rawArticle.researchMethodType);
     }
 

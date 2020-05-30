@@ -5,6 +5,7 @@ import SearchBloc from "./SearchBloc";
 import DateUtils from "../libs/DateUtils";
 import BaseBloc from '../local-libs/bloc/BaseBloc';
 import { ISearchRequestParam } from '../libs/api/SearchRequest';
+import StatusType from '../libs/enums/StatusType';
 
 export default class SearchResultBloc extends BaseBloc {
 
@@ -39,14 +40,15 @@ export default class SearchResultBloc extends BaseBloc {
                 value: f.value.getValue()
             })),
             joints: this.searchBloc.joints.getValue().map(j => j.joint.getValue().name),
-            dates: [
+            dates: this.searchBloc.filterDate.getValue() ? [
                 DateUtils.toUTC(this.searchBloc.minDate.getValue()),
                 DateUtils.toUTC(this.searchBloc.maxDate.getValue())
-            ],
+            ] : undefined,
             sort: {
-                key: this.searchBloc.sort.sort.getValue().dbField,
-                order: this.searchBloc.sort.isAscending.getValue() ? 1 : -1
-            }
+                key: this.searchBloc.columnInfo.getSortingColumn().dbField,
+                order: this.searchBloc.columnInfo.isAscending.getValue() ? 1 : -1
+            },
+            status: StatusType.complete.name
         };
     }
 

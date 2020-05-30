@@ -5,6 +5,7 @@ import path from "path";
 import BibtexParser from "../../libs/BibtexParser";
 
 import Article from "../../models/Article";
+import StatusType from "../../libs/enums/StatusType";
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.get("/fill-test-data", async (req, res) => {
         entries.forEach(async (e) => {
             const article = new Article({
                 submission: {
+                    statusType: StatusType.complete.name,
                     bibliography: e
                 }
             });

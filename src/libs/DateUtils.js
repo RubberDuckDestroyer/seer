@@ -16,6 +16,13 @@ const DateUtils = {
 
     getMonthName: (monthIndex) => {
         return DateUtils.monthNames[monthIndex];
+    },
+
+    isValidDate: (date) => {
+        if (typeof (date) === "string") {
+            date = new Date(date);
+        }
+        return date instanceof Date && !isNaN(date);
     }
 };
 export default DateUtils;

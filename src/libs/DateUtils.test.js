@@ -22,4 +22,9 @@ describe("Tests DateUtils library", () => {
         expect(date.getUTCMinutes()).to.equal(0);
         expect(date.getUTCSeconds()).to.equal(0);
     });
+    it("Tests whether date can be validated", () => {
+        expect(DateUtils.isValidDate(new Date())).to.equal(true);
+        expect(DateUtils.isValidDate("2020-05-05")).to.equal(true);
+        expect(DateUtils.isValidDate("dffddba")).to.equal(false);
+    });
 });

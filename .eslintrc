@@ -40,6 +40,8 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "no-bitwise": "off",
-    "no-mixed-operators": "off"
+    "no-mixed-operators": "off",
+    "max-len": "off",
+    "no-restricted-globals": "off"
   }
 }
