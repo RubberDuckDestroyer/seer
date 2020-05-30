@@ -35,6 +35,7 @@ router.post("/", async (req, res) => {
                 $lte: DateUtils.toUTC(dates[1])
             };
         }
+        console.log(query);
 
         // Apply sorting.
         const sortOption = {};
