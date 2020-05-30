@@ -72,6 +72,8 @@ export class SearchColumnInfo {
         const newColumns = [...this.columns.getValue()];
         if (!this.isColumnIndexValid(index))
             return;
+        if (this.containsColumn(type))
+            return;
         
         newColumns[index] = type;
         this.columns.setValue(newColumns);
@@ -93,6 +95,18 @@ export class SearchColumnInfo {
      */
     getSortingColumn(): SortEnum {
         return this.columns.getValue()[this.sortingIndex.getValue()];
+    }
+
+    /**
+     * Returns whether the specified column type has been selected.
+     */
+    containsColumn(type: SortEnum) {
+        const columns = this.columns.getValue();
+        for (let i = 0; i < columns.length; i++) {
+            if (columns[i] === type)
+                return true;
+        }
+        return false;
     }
 
     /**

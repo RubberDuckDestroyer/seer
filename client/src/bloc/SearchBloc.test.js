@@ -50,6 +50,19 @@ test("Changing result columns", () => {
     expect(columnInfo.columns.getValue()[0]).toBe(SortType.methodType);
 });
 
+test("Preventing multiple columns having the same column type", () => {
+    const bloc = new SearchBloc();
+    const columnInfo = bloc.columnInfo;
+
+    columnInfo.setColumn(0, SortType.methodType);
+    expect(columnInfo.columns.getValue()[0]).toBe(SortType.methodType);
+
+    expect(columnInfo.columns.getValue()[1]).toBe(SortType.publicationDate);
+    // Even if the same column is specified, it shouldn't affect the actual data.
+    columnInfo.setColumn(1, SortType.methodType);
+    expect(columnInfo.columns.getValue()[1]).toBe(SortType.publicationDate);
+});
+
 test("Validating default sort method", () => {
     const bloc = new SearchBloc();
     const columnInfo = bloc.columnInfo;
