@@ -4,7 +4,7 @@ import SortType from "../libs/enums/SortType";
 import Enum from "../libs/enums/Enum";
 import Bindable from "../local-libs/data/Bindable";
 import { FilterCategoryEnum } from "../libs/enums/FilterCategoryType";
-import { SortEnum } from "../libs/enums/SortType";
+import { SortEnum } from '../libs/enums/SortType';
 import DateUtils from "../libs/DateUtils";
 import { FilterJointEnum } from '../libs/enums/FilterJointType';
 import FilterJointType from '../libs/enums/FilterJointType';
@@ -47,14 +47,59 @@ export class SearchJointInfo {
     }
 }
 
-export class SearchSortInfo {
+export class SearchColumnInfo {
 
-    sort: Bindable<SortEnum>;
+    columns: Bindable<SortEnum[]>;
+    sortingIndex: Bindable<number>;
     isAscending: Bindable<boolean>;
 
     constructor() {
-        this.sort = new Bindable<SortEnum>(SortType.title);
+        this.columns = new Bindable<SortEnum[]>(new Array<SortEnum>(
+            SortType.result,
+            SortType.publicationDate,
+            SortType.title,
+            SortType.author,
+            SortType.methodologyType
+        ));
+        this.sortingIndex = new Bindable<number>(2);
         this.isAscending = new Bindable<boolean>(true);
+    }
+
+    /**
+     * Changes the column to display at specified index.
+     */
+    setColumn(index: number, type: SortEnum) {
+        const newColumns = [...this.columns.getValue()];
+        if (!this.isColumnIndexValid(index))
+            return;
+        
+        newColumns[index] = type;
+        this.columns.setValue(newColumns);
+    }
+
+    /**
+     * Sets the sorting column and whether the results should be in ascending order.
+     */
+    setSort(sortIndex: number, isAscending: boolean) {
+        if(!this.isColumnIndexValid(sortIndex))
+            return;
+
+        this.sortingIndex.setValue(sortIndex);
+        this.isAscending.setValue(isAscending);
+    }
+
+    /**
+     * Returns the column type which the sorting is done for.
+     */
+    getSortingColumn(): SortEnum {
+        return this.columns.getValue()[this.sortingIndex.getValue()];
+    }
+
+    /**
+     * Returns whether the specified index is within the column count.
+     */
+    isColumnIndexValid(index: number) {
+        return index >= 0 && index < this.columns.getValue().length;
     }
 }
 
@@ -64,7 +109,7 @@ export default class SearchBloc extends BaseBloc {
     maxDate: Bindable<String>;
     filters: Bindable<SearchFilterInfo[]>;
     joints: Bindable<SearchJointInfo[]>;
-    sort: SearchSortInfo;
+    columnInfo: SearchColumnInfo;
 
 
     constructor() {
@@ -73,7 +118,7 @@ export default class SearchBloc extends BaseBloc {
         this.maxDate = new Bindable<String>(DateUtils.toUTC(new Date(new Date().getUTCFullYear(), 12, 1)).toString());
         this.filters = new Bindable<SearchFilterInfo[]>(new Array<SearchFilterInfo>());
         this.joints = new Bindable<SearchJointInfo[]>(new Array<SearchJointInfo>());
-        this.sort = new SearchSortInfo();
+        this.columnInfo = new SearchColumnInfo();
 
         this.addFilter();
     }

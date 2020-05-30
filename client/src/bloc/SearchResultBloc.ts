@@ -44,8 +44,8 @@ export default class SearchResultBloc extends BaseBloc {
                 DateUtils.toUTC(this.searchBloc.maxDate.getValue())
             ],
             sort: {
-                key: this.searchBloc.sort.sort.getValue().dbField,
-                order: this.searchBloc.sort.isAscending.getValue() ? 1 : -1
+                key: this.searchBloc.columnInfo.getSortingColumn().dbField,
+                order: this.searchBloc.columnInfo.isAscending.getValue() ? 1 : -1
             }
         };
     }
