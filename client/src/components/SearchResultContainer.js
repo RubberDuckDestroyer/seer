@@ -10,7 +10,8 @@ import {
     makeStyles,
     TableSortLabel,
     Select,
-    MenuItem
+    MenuItem,
+    Button
 } from "@material-ui/core";
 import moment from "moment";
 
@@ -85,25 +86,41 @@ const SearchResultContainer = () => {
                         <TableRow>
                             {
                                 columns.map((column, colIndex) => {
+                                    const isSortingColumn = colIndex === sortingIndex;
                                     return (
                                         <TableCell key={column.name + colIndex}>
-                                            <Select
-                                                className={classes.selectionItem}
-                                                value={column}
-                                                onChange={(e) => onColumnChange(colIndex, e.target.value)}
-                                            >
-                                                {
-                                                    Object.values(ColumnType).map(type => (
-                                                        <MenuItem key={type.name} value={type}>{type.name}</MenuItem>
-                                                    ))
-                                                }
-                                            </Select>
-                                            <TableSortLabel
-                                                active={sortingIndex === colIndex}
-                                                direction={isAscending ? "asc" : "desc"}
-                                                onClick={() => onSortDirChange(colIndex, !isAscending)}
-                                            >
-                                            </TableSortLabel>
+                                            {
+                                                isSortingColumn &&
+                                                [
+                                                    <Select
+                                                        key={`selection${colIndex}`}
+                                                        className={classes.selectionItem}
+                                                        value={column}
+                                                        onChange={(e) => onColumnChange(colIndex, e.target.value)}
+                                                    >
+                                                        {
+                                                            Object.values(ColumnType).map(type => (
+                                                                <MenuItem key={type.name} value={type}>{type.name}</MenuItem>
+                                                            ))
+                                                        }
+                                                    </Select>,
+                                                    <TableSortLabel
+                                                        key={`sortButton${colIndex}`}
+                                                        active={true}
+                                                        direction={isAscending ? "asc" : "desc"}
+                                                        onClick={() => onSortDirChange(colIndex, !isAscending)}
+                                                    >
+                                                    </TableSortLabel>
+                                                ]
+                                            }
+                                            {
+                                                !isSortingColumn &&
+                                                <Button
+                                                    onClick={() => onSortDirChange(colIndex, isAscending)}
+                                                >
+                                                    {column.name}
+                                                </Button>
+                                            }
                                         </TableCell>
                                     );
                                 })
