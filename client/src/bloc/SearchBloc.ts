@@ -121,6 +121,7 @@ export default class SearchBloc extends BaseBloc {
 
     minDate: Bindable<String>;
     maxDate: Bindable<String>;
+    filterDate: Bindable<boolean>;
     filters: Bindable<SearchFilterInfo[]>;
     joints: Bindable<SearchJointInfo[]>;
     columnInfo: SearchColumnInfo;
@@ -130,6 +131,7 @@ export default class SearchBloc extends BaseBloc {
         super();
         this.minDate = new Bindable<String>(DateUtils.toUTC(new Date(1900, 1, 1)).toString());
         this.maxDate = new Bindable<String>(DateUtils.toUTC(new Date(new Date().getUTCFullYear(), 12, 1)).toString());
+        this.filterDate = new Bindable<boolean>(true);
         this.filters = new Bindable<SearchFilterInfo[]>(new Array<SearchFilterInfo>());
         this.joints = new Bindable<SearchJointInfo[]>(new Array<SearchJointInfo>());
         this.columnInfo = new SearchColumnInfo();

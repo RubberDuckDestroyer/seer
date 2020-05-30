@@ -17,7 +17,7 @@ interface ISearchSort {
 export interface ISearchRequestParam {
     filters: ISearchFilter[],
     joints: String[],
-    dates: [
+    dates?: [
         Date,
         Date
     ],
@@ -55,16 +55,15 @@ export default class SearchRequest implements IRequestT<SearchResponse> {
 
     async request() {
         try {
-            const body = {
+            const body: any = {
                 filters: this.params.filters,
                 joints: this.params.joints,
-                dates: [
-                    this.params.dates[0].toISOString(),
-                    this.params.dates[1].toISOString()
-                ],
                 sort: this.params.sort,
-                status: this.params.status
+                status: this.params.status,
             };
+            if (Array.isArray(this.params.dates)) {
+                body.dates = this.params.dates;
+            }
             return new SearchResponse(await axios.post(getUrl("/api/article"), body));
         }
         catch (e) {

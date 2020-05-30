@@ -6,7 +6,9 @@ import {
   Slider,
   Typography,
   makeStyles,
-  Hidden
+  Hidden,
+  Checkbox,
+  FormControlLabel
 } from "@material-ui/core";
 import moment from "moment";
 
@@ -37,6 +39,7 @@ const DateContainer = ({ style }) => {
   const searchBloc = useContext(AppContext).getBloc(SearchBloc);
   const minDate = DateUtils.toUTC(useBindable(searchBloc.minDate));
   const maxDate = DateUtils.toUTC(useBindable(searchBloc.maxDate));
+  const isFilterDate = useBindable(searchBloc.filterDate);
 
   const minDateString = getFormattedDate(minDate);
   const maxDateString = getFormattedDate(maxDate);
@@ -73,6 +76,10 @@ const DateContainer = ({ style }) => {
     }
   };
 
+  const onFilterDateButton = () => {
+    searchBloc.filterDate.setValue(!searchBloc.filterDate.getValue());
+  };
+
   const classes = useStyles();
 
   return (
@@ -83,7 +90,7 @@ const DateContainer = ({ style }) => {
       }}
     >
       <Grid className={classes.gridContainer} container spacing={1}>
-        <Grid item xs={6} md={3} lg={2}>
+        <Grid item xs={4} md={3} lg={2}>
           <TextField
             id="startDate"
             label="From Date"
@@ -127,7 +134,7 @@ const DateContainer = ({ style }) => {
             />
           </Grid>
         </Hidden>
-        <Grid item xs={6} md={3} lg={2}>
+        <Grid item xs={4} md={3} lg={2}>
           <TextField
             id="endDate"
             label="To Date"
@@ -138,6 +145,15 @@ const DateContainer = ({ style }) => {
             InputLabelProps={{
               shrink: true,
             }}
+          />
+        </Grid>
+        <Grid item xs={4} md={12}>
+          <FormControlLabel
+            value="end"
+            control={<Checkbox color="primary" checked={isFilterDate} />}
+            label="Filter date?"
+            labelPlacement="end"
+            onClick={onFilterDateButton}
           />
         </Grid>
       </Grid>
