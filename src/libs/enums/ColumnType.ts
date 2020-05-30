@@ -19,6 +19,7 @@ const ColumnType = {
     journal: new ColumnEnum("Journal", "submission.bibliography.JOURNAL"),
     publicationDate: new ColumnEnum("Publication date", "submission.bibliography.DATE"),
     publicationType: new ColumnEnum("Publication type", "submission.bibliography.type"),
+    doi: new ColumnEnum("DOI", "submission.bibliography.DOI"),
 
     // Article data
     question: new ColumnEnum("Question", "question"),

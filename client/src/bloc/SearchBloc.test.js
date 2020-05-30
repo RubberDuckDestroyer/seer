@@ -37,7 +37,7 @@ test("Validating default search result columns", () => {
         ColumnType.publicationDate,
         ColumnType.title,
         ColumnType.author,
-        ColumnType.methodologyType,
+        ColumnType.doi,
     ];
     defaultColumns.forEach((c, index) => expect(columns[index]).toBe(c));
 });

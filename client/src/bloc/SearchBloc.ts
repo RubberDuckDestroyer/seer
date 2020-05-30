@@ -59,7 +59,7 @@ export class SearchColumnInfo {
             ColumnType.publicationDate,
             ColumnType.title,
             ColumnType.author,
-            ColumnType.methodologyType
+            ColumnType.doi
         ));
         this.sortingIndex = new Bindable<number>(2);
         this.isAscending = new Bindable<boolean>(true);

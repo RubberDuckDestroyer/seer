@@ -38,6 +38,7 @@ export default class ArticleInfo {
             case ColumnType.journal: return this.getJournal();
             case ColumnType.publicationDate: return this.getDate();
             case ColumnType.publicationType: return this.getType();
+            case ColumnType.doi: return this.getDOI();
             case ColumnType.question: return this.getQuestion();
             case ColumnType.metric: return this.getMetric();
             case ColumnType.researchMethodType: return this.getResearchMethodType();
@@ -51,6 +52,8 @@ export default class ArticleInfo {
     }
 
     getType() { return this.bibliography.type as String; }
+
+    getDOI() { return this.bibliography.DOI as String; }
 
     getAuthor() { return this.bibliography.AUTHOR as String; }
 
