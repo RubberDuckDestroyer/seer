@@ -68,7 +68,12 @@ export default class ArticleInfo {
 
     getPages() { return this.bibliography.PAGES as String; }
 
-    getDate() { return DateUtils.toUTC(this.bibliography.DATE as String); }
+    getDate() {
+        const dateString = this.bibliography.DATE;
+        if(typeof (dateString) === "string")
+            return DateUtils.toUTC(dateString);
+        return null;
+    }
 
     getCredibility() {
         if (!this.cachedCredibility) {
