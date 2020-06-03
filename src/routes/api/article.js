@@ -14,20 +14,19 @@ router.post("/", async (req, res) => {
     try {
         const {
             filters,
+            joints,
             dates,
-            sort
+            sort,
+            status
         } = req.body;
 
         // Build query filter.
-        const query = {};
-        filters.forEach(f => {
-            if (typeof (f) === "string") {
-                // TODO: This is either AND or OR.
-            }
-            else {
-                query[f.category] = QueryFilterBuilder.buildForQuery(f);
-            }
-        });
+        const query = QueryFilterBuilder.build(filters, joints);
+
+        // Apply status filtering.
+        if (typeof (status) === "string") {
+            query["submission.statusType"] = status;
+        }
 
         // Apply date filtering.
         if (Array.isArray(dates) && dates.length === 2) {
@@ -36,6 +35,7 @@ router.post("/", async (req, res) => {
                 $lte: DateUtils.toUTC(dates[1])
             };
         }
+        console.log(query);
 
         // Apply sorting.
         const sortOption = {};
@@ -46,9 +46,7 @@ router.post("/", async (req, res) => {
             sortOption["submission.bibliography.TITLE"] = 1;
         }
 
-        // TODO: Get back to $and and $or joining when the PO gives an answer.
         const result = await Article.find(query).sort(sortOption);
-
         res.json(new ApiResponse({
             isSuccess: true,
             data: result

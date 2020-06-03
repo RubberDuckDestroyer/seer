@@ -1,6 +1,6 @@
 import SearchRequest from "./SearchRequest";
 
-import SortType from "../enums/SortType";
+import ColumnType from "../enums/ColumnType";
 import FilterCategoryType from "../enums/FilterCategoryType";
 import MethodType from "../enums/MethodType";
 
@@ -12,7 +12,7 @@ const createRequest = () => {
     const exampleCondition = exampleCategory.valueType.conditions[0];
     const exampleValue = MethodType.planningPoker;
 
-    const exampleSort = SortType.title;
+    const exampleSort = ColumnType.title;
 
     return new SearchRequest({
         filters: [
@@ -22,6 +22,7 @@ const createRequest = () => {
                 value: exampleValue.name
             }
         ],
+        joints: [],
         dates: [
             new Date("2001-07-31"),
             new Date("2001-08-01")
