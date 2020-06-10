@@ -46,8 +46,6 @@ const SubmissionView = () => {
   const isErrorAuthors = failedSubmit && isValidStringInput(authors);
   const isErrorSource = failedSubmit && isValidStringInput(source);
 
-  // (/^[0-0]^/) 😂
-
   const isDoiShown = type === "Article" || type === "Proceeding";
   const isWebsiteShown = type === "Website";
 
