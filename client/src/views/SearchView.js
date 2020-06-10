@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {
-  Box, Button, makeStyles, Container
+  Box, Button, makeStyles, Container, Typography
 } from "@material-ui/core";
 
 import FilterContainer from "../components/FilterContainer";
@@ -50,6 +50,8 @@ const SearchView = () => {
 
   return (
     <Container>
+      <Typography variant="h4" align="center">Search articles</Typography>
+      <Box m={1} />
       {
         searchFilters.map((f, index) => {
           const getFilterContainer = () => (
