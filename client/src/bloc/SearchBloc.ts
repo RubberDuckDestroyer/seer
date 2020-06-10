@@ -1,14 +1,13 @@
-import BaseBloc from "../local-libs/bloc/BaseBloc";
 import FilterCategoryType from "../libs/enums/FilterCategoryType";
 import ColumnType from "../libs/enums/ColumnType";
 import Enum from "../libs/enums/Enum";
-import Bindable from "../local-libs/data/Bindable";
 import { FilterCategoryEnum } from "../libs/enums/FilterCategoryType";
 import { ColumnEnum } from '../libs/enums/ColumnType';
 import DateUtils from "../libs/DateUtils";
 import { FilterJointEnum } from '../libs/enums/FilterJointType';
 import FilterJointType from '../libs/enums/FilterJointType';
 import Utils from "../libs/Utils";
+import { Bindable, BaseBloc } from 'bindable-bloc';
 
 export class SearchFilterInfo {
 

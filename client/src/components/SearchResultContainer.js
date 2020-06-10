@@ -14,10 +14,10 @@ import {
     Button
 } from "@material-ui/core";
 import moment from "moment";
+import { useBindable } from "bindable-bloc";
 
 import AppContext from "../AppContext";
 import SearchResultBloc from "../bloc/SearchResultBloc";
-import { useBindable } from "../local-libs/data/Bindable";
 import SearchBloc from "../bloc/SearchBloc";
 import ColumnType from "../libs/enums/ColumnType";
 import Enum from "../libs/enums/Enum";

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import BlocContextValue from "./local-libs/bloc/BlocContextValue";
+import { BlocContextValue } from "bindable-bloc";
 import SearchBloc from "./bloc/SearchBloc";
 import SearchResultBloc from "./bloc/SearchResultBloc";
 import LoaderBloc from './bloc/LoaderBloc';

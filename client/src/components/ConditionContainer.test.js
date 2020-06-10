@@ -1,7 +1,5 @@
 import ConditionContainer from './ConditionContainer';
 import { render } from "@testing-library/react";
-import { Dropdown } from "@material-ui/core";
-import { mount } from "enzyme"
 import React from "react";
 import { SearchJointInfo } from "../bloc/SearchBloc";
 
