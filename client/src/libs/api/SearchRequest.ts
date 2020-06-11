@@ -4,25 +4,25 @@ import ArticleInfo from "../types/ArticleInfo";
 import { IRequestT } from "./NetworkHelper";
 
 interface ISearchFilter {
-    category: String,
-    condition: String,
-    value: String
+    category: string,
+    condition: string,
+    value: string
 }
 
 interface ISearchSort {
-    key: String,
+    key: string,
     order: number
 }
 
 export interface ISearchRequestParam {
     filters: ISearchFilter[],
-    joints: String[],
+    joints: string[],
     dates?: [
         Date,
         Date
     ],
     sort: ISearchSort,
-    status?: String
+    status?: string
 }
 
 class SearchResponse extends ApiResponse {

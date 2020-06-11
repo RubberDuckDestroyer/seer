@@ -2,10 +2,10 @@ import Enum from "./Enum";
 
 export class ColumnEnum extends Enum {
 
-  dbField: String;
+  dbField: string;
 
 
-  constructor(name: String, dbField: String) {
+  constructor(name: string, dbField: string) {
     super(name);
     this.dbField = dbField;
   }

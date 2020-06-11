@@ -1,12 +1,12 @@
 export default class Enum {
 
-    name: String;
+    name: string;
 
-    constructor(name: String) {
+    constructor(name: string) {
         this.name = name;
     }
 
-    static findByName(type: Object, name: String) {
+    static findByName(type: Object, name: string) {
         const values = Object.values(type);
         for (let i = 0; i < values.length; i++) {
             const e = values[i] as Enum;

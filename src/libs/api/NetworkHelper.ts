@@ -13,7 +13,7 @@ export interface IRequest {
 interface ApiResponseParam {
     isSuccess: boolean;
     data?: any;
-    error?: String;
+    error?: string;
 }
 
 function isApiResponseParam(object: any): object is ApiResponseParam {
@@ -25,7 +25,7 @@ export class ApiResponse {
 
     isSuccess: boolean = false;
     data: any = null;
-    error: String = "";
+    error: string = "";
 
     constructor(response: AxiosResponse | Error | ApiResponseParam) {
         if (response instanceof Error) {
@@ -59,6 +59,6 @@ export class ApiResponse {
 /**
  * Returns the full url to the API endpoint.
  */
-export function getUrl(path: String) {
+export function getUrl(path: string) {
     return baseUrl + path;
 }

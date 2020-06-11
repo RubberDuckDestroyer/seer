@@ -12,7 +12,7 @@ export default class SearchResultBloc extends BaseBloc {
     results: Bindable<ArticleInfo[]>;
 
     isSuccess: Bindable<boolean>;
-    errorMessage: Bindable<String>;
+    errorMessage: Bindable<string>;
 
 
     constructor(searchBloc: SearchBloc) {
@@ -20,7 +20,7 @@ export default class SearchResultBloc extends BaseBloc {
         this.searchBloc = searchBloc;
         this.results = new Bindable<ArticleInfo[]>(new Array<ArticleInfo>());
         this.isSuccess = new Bindable<boolean>(true);
-        this.errorMessage = new Bindable<String>("");
+        this.errorMessage = new Bindable<string>("");
     }
 
     clearResults() {

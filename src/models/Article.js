@@ -9,7 +9,7 @@ const ArticleSchema = new mongoose.Schema({
             ref: Profile.modelName
         },
         bibliography: mongoose.Schema.Types.Mixed,
-        statusType: String,
+        statusType: string,
         submitDate: {
             type: Date,
             default: Date.now
@@ -54,23 +54,23 @@ const ArticleSchema = new mongoose.Schema({
             }
         }
     ],
-    question: String,
-    metric: String,
-    researchMethodType: String,
-    methodType: String,
-    methodologyType: String,
-    benefit: String,
+    question: string,
+    metric: string,
+    researchMethodType: string,
+    methodType: string,
+    methodologyType: string,
+    benefit: string,
     participants: [String],
     context: {
-        where: String,
-        when: String,
-        what: String,
-        whom: String,
-        how: String
+        where: string,
+        when: string,
+        what: string,
+        whom: string,
+        how: string
     },
-    result: String,
+    result: string,
     confidenceRating: Number,
-    integrityType: String
+    integrityType: string
 });
 
 const Article = mongoose.model("Article", ArticleSchema);

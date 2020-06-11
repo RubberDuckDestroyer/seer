@@ -51,25 +51,25 @@ export default class ArticleInfo {
         return "";
     }
 
-    getType() { return this.bibliography.type as String; }
+    getType() { return this.bibliography.type as string; }
 
-    getDOI() { return this.bibliography.DOI as String; }
+    getDOI() { return this.bibliography.DOI as string; }
 
-    getAuthor() { return this.bibliography.AUTHOR as String; }
+    getAuthor() { return this.bibliography.AUTHOR as string; }
 
-    getTitle() { return this.bibliography.TITLE as String; }
+    getTitle() { return this.bibliography.TITLE as string; }
 
-    getJournal() { return this.bibliography.JOURNAL as String; }
+    getJournal() { return this.bibliography.JOURNAL as string; }
 
-    getYear() { return this.bibliography.YEAR as String; }
+    getYear() { return this.bibliography.YEAR as string; }
 
-    getMonth() { return this.bibliography.MONTH as String; }
+    getMonth() { return this.bibliography.MONTH as string; }
 
-    getVolume() { return this.bibliography.VOLUME as String; }
+    getVolume() { return this.bibliography.VOLUME as string; }
 
-    getNumber() { return this.bibliography.NUMBER as String; }
+    getNumber() { return this.bibliography.NUMBER as string; }
 
-    getPages() { return this.bibliography.PAGES as String; }
+    getPages() { return this.bibliography.PAGES as string; }
 
     getDate() {
         const dateString = this.bibliography.DATE;
@@ -118,9 +118,9 @@ export default class ArticleInfo {
         return this.quality;
     }
 
-    getQuestion() { return this.rawArticle.question as String; }
+    getQuestion() { return this.rawArticle.question as string; }
 
-    getMetric() { return this.rawArticle.metric as String; }
+    getMetric() { return this.rawArticle.metric as string; }
 
     getResearchMethodType() {
         return Enum.findByName(ResearchMethodType, this.rawArticle.researchMethodType);
@@ -134,7 +134,7 @@ export default class ArticleInfo {
         return Enum.findByName(MethodologyType, this.rawArticle.methodologyType);
     }
 
-    getBenefit() { return this.rawArticle.benefit as String; }
+    getBenefit() { return this.rawArticle.benefit as string; }
 
     getParticipants() {
         const participants = this.rawArticle.participants as any[];
@@ -168,7 +168,7 @@ export default class ArticleInfo {
         return context;
     }
 
-    getResult() { return this.rawArticle.result as String; }
+    getResult() { return this.rawArticle.result as string; }
 
     getConfidenceRating() { return this.rawArticle.confidenceRating as number; }
 
