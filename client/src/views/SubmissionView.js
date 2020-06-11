@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     Container,
     Typography,
@@ -13,6 +13,11 @@ import {
     Grid,
     FormHelperText
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
+import AppContext from "../AppContext";
+import SubmitBloc from "../bloc/SubmitBloc";
+import LoaderBloc from "../bloc/LoaderBloc";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -27,6 +32,10 @@ function isValidStringInput(value) {
 const SubmissionView = () => {
 
   const classes = useStyles();
+  const history = useHistory();
+
+  const submitBloc = useContext(AppContext).getBloc(SubmitBloc);
+  const loaderBloc = useContext(AppContext).getBloc(LoaderBloc);
 
   const [title, setTitle] = useState("");
   const [authors, setAuthors] = useState("");
@@ -83,8 +92,28 @@ const SubmissionView = () => {
   const onUploadButton = () => {
 
   };
-  const onSubmitButton = () => {
-    setFailedSubmit(true);
+  const onSubmitButton = async () => {
+    loaderBloc.show();
+    const result = await submitBloc.submit({
+      AUTHOR: authors,
+      SOURCE: source,
+      TITLE: title,
+      YEAR: year,
+      type,
+      DOI: doi,
+      ISSUE: issue,
+      PAGES: pages,
+      URL: website,
+      VOLUME: volume
+    });
+    loaderBloc.hide();
+
+    if (result) {
+      history.push("/submitted");
+    }
+    else {
+      setFailedSubmit(true);
+    }
   };
 
   return (
