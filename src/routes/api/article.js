@@ -55,19 +55,19 @@ router.post("/submit", async (req, res) => {
   try {
     // Validate mandatory fields
     if (!Utils.isValidString(info.TITLE)) {
-      throw new Error("Missing mandatory field - TITLE!");
+      throw new Error("Title is missing!");
     }
     if (!Utils.isValidString(info.AUTHOR)) {
-      throw new Error("Missing mandatory field - AUTHOR!");
+      throw new Error("Author is missing!");
     }
     if (!Utils.isValidString(info.SOURCE)) {
-      throw new Error("Missing mandatory field - SOURCE!");
+      throw new Error("Source is missing!");
     }
     if (!Utils.isValidString(info.type)) {
-      throw new Error("Missing mandatory field - type!");
+      throw new Error("Type is missing!");
     }
     if (!Utils.isValidNumber(info.YEAR)) {
-      throw new Error("Missing mandatory field - YEAR!");
+      throw new Error("Year is missing!");
     }
 
     // Make sure type is one of supported values.
@@ -95,7 +95,7 @@ router.post("/submit", async (req, res) => {
     }));
   }
   catch (e) {
-    res.status(401).json(new ApiResponse(e));
+    res.json(new ApiResponse(e));
   }
 });
 
