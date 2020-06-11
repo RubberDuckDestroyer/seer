@@ -2,36 +2,36 @@ const mongoose = require("mongoose");
 
 const ProfileSchema = new mongoose.Schema({
     username: {
-        type: string,
+        type: String,
         required: true
     },
     password: {
-        type: string,
+        type: String,
         required: true
     },
     firstName: {
-        type: string,
+        type: String,
         required: true
     },
     lastName: {
-        type: string,
+        type: String,
         required: true
     },
-    middleName: string,
+    middleName: String,
     email: {
-        type: string,
+        type: String,
         required: true
     },
     affiliationType: {
-        type: string,
+        type: String,
         required: true
     },
     affiliationName: {
-        type: string,
+        type: String,
         required: true
     },
-    role: string,
-    gender: string,
+    role: String,
+    gender: String,
     birthDate: Date
 });
 
