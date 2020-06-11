@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
     Container,
     Typography,
@@ -14,6 +14,7 @@ import {
     FormHelperText
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { useBindable } from "bindable-bloc";
 
 import AppContext from "../AppContext";
 import SubmitBloc from "../bloc/SubmitBloc";
@@ -37,6 +38,9 @@ const SubmissionView = () => {
   const submitBloc = useContext(AppContext).getBloc(SubmitBloc);
   const loaderBloc = useContext(AppContext).getBloc(LoaderBloc);
 
+  const isSubmitSuccess = useBindable(submitBloc.isSuccess);
+  const submitErrorMessage = useBindable(submitBloc.errorMessage);
+
   const [title, setTitle] = useState("");
   const [authors, setAuthors] = useState("");
   const [source, setSource] = useState("");
@@ -48,12 +52,19 @@ const SubmissionView = () => {
   const [doi, setDoi] = useState("");
   const [website, setWebsite] = useState("");
 
-  const [failedSubmit, setFailedSubmit] = useState(false);
 
-  const isErrorTitle = failedSubmit && isValidStringInput(title);
+  useEffect(() => {
+    // Reset the submit bloc state on entering the view.
+    submitBloc.reset();
+
+    return () => { };
+  }, []);
+
+
+  const isErrorTitle = !isSubmitSuccess && isValidStringInput(title);
   const isErrorYear = !(/^[0-9]+$/).exec(year);
-  const isErrorAuthors = failedSubmit && isValidStringInput(authors);
-  const isErrorSource = failedSubmit && isValidStringInput(source);
+  const isErrorAuthors = !isSubmitSuccess && isValidStringInput(authors);
+  const isErrorSource = !isSubmitSuccess && isValidStringInput(source);
 
   const isDoiShown = type === "Article" || type === "Proceeding";
   const isWebsiteShown = type === "Website";
@@ -110,9 +121,6 @@ const SubmissionView = () => {
 
     if (result) {
       history.push("/submitted");
-    }
-    else {
-      setFailedSubmit(true);
     }
   };
 
@@ -210,6 +218,13 @@ const SubmissionView = () => {
                 </FormControl>
               }
             </Grid>
+            <Box m={1}/>
+            {
+              !isSubmitSuccess &&
+              <Grid item xs={12}>
+                <Typography color="error">{submitErrorMessage}</Typography>
+              </Grid>
+            }
             <Box m={1}/>
             <Grid item xs={12}>
               <Button fullWidth variant="contained" color="secondary" onClick={onSubmitButton}>Submit article</Button>
