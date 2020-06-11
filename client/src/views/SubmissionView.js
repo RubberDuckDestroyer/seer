@@ -58,7 +58,7 @@ const SubmissionView = () => {
     submitBloc.reset();
 
     return () => { };
-  }, []);
+  }, [submitBloc]);
 
 
   const isErrorTitle = !isSubmitSuccess && isValidStringInput(title);
