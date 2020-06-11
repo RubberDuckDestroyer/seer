@@ -8,6 +8,7 @@ import SearchView from "./views/SearchView";
 import LoaderView from "./views/LoaderView";
 import SubmissionView from "./views/SubmissionView";
 import Navbar from "./components/Navbar";
+import SubmittedView from "./views/SubmittedView";
 
 const theme = createMuiTheme({
   palette: {
@@ -34,6 +35,9 @@ const App = () => {
               </Route>
               <Route path="/submit">
                 <SubmissionView />
+              </Route>
+              <Route path="/submitted">
+                <SubmittedView />
               </Route>
             </Switch>
           </BrowserRouter>
