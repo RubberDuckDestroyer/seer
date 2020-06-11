@@ -1,5 +1,7 @@
 import React from 'react';
-import { Container, Typography, Box, Button } from "@material-ui/core";
+import {
+  Container, Typography, Box, Button
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 const SubmittedView = () => {
