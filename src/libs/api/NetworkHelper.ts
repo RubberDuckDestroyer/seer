@@ -50,7 +50,7 @@ export class ApiResponse {
                 this.data = data.data;
             }
             else {
-                this.error = String(data.data);
+                this.error = String(data.error);
             }
         }
     }
