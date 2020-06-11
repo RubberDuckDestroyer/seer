@@ -35,7 +35,7 @@ export default class SubmitBloc extends BaseBloc {
   async submit(params: ISubmitParam): Promise<boolean> {
     const response = await new SubmitRequest(params).request();
     this.isSuccess.setValue(response.isSuccess);
-    // this.errorMessage.setValue(response.error);
+    this.errorMessage.setValue(response.error);
     return response.isSuccess;
   }
 }
