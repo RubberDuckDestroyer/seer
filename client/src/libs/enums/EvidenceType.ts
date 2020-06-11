@@ -15,7 +15,7 @@ export class EvidenceTypeEnum extends Enum {
 const EvidenceType = {
   artice: new EvidenceTypeEnum("Article", "JOURNAL"),
   book: new EvidenceTypeEnum("Book", "BOOK"),
-  proceeding: new EvidenceTypeEnum("Proceeding", "PROCEEDING"),
+  proceeding: new EvidenceTypeEnum("Proceedings", "PROCEEDINGS"),
   website: new EvidenceTypeEnum("Website", "WEBSITE"),
 };
 export default EvidenceType;

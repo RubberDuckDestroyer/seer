@@ -67,6 +67,7 @@ router.post("/submit", async (req, res) => {
       throw new Error("Type is missing!");
     }
     if (!Utils.isValidNumber(info.YEAR)) {
+      console.log("Year type: " + typeof (info.YEAR));
       throw new Error("Year is missing!");
     }
 

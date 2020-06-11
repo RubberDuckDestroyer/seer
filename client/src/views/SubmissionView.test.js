@@ -21,7 +21,7 @@ test("Whether the form is displayed correctly.", () => {
   expect(buttons.length).toBe(2);
   expect(buttons.containsMatchingElement(b => b.text() === "Upload Bibtex")).toBeTruthy();
   expect(buttons.containsMatchingElement(b => b.text() === "Submit article")).toBeTruthy();
-  
+
   const inputLabels = component.find(InputLabel);
   expect(inputLabels.containsMatchingElement(l => l.text() === "Title")).toBeTruthy();
   expect(inputLabels.containsMatchingElement(l => l.text() === "Authors")).toBeTruthy();

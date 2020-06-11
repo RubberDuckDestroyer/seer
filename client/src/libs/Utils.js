@@ -27,6 +27,16 @@ const Utils = {
       return false;
     }
     return true;
+  },
+
+  capitalize(value) {
+    if (value === null || value === undefined) {
+      return value;
+    }
+    if (typeof (value) !== "string" || value.length < 1) {
+      return value;
+    }
+    return value.charAt(0).toUpperCase() + value.slice(1);
   }
 };
 export default Utils;

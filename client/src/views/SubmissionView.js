@@ -19,6 +19,11 @@ import { useBindable } from "bindable-bloc";
 import AppContext from "../AppContext";
 import SubmitBloc from "../bloc/SubmitBloc";
 import LoaderBloc from "../bloc/LoaderBloc";
+import Dropzone from "../components/Dropzone";
+import BibtexParser from "../libs/BibtexParser";
+import EvidenceType, { EvidenceTypeEnum } from "../libs/enums/EvidenceType";
+import Enum from "../libs/enums/Enum";
+import Utils from "../libs/Utils";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -66,8 +71,8 @@ const SubmissionView = () => {
   const isErrorAuthors = !isSubmitSuccess && isValidStringInput(authors);
   const isErrorSource = !isSubmitSuccess && isValidStringInput(source);
 
-  const isDoiShown = type === "Article" || type === "Proceeding";
-  const isWebsiteShown = type === "Website";
+  const isDoiShown = type === EvidenceType.artice.name || type === EvidenceType.proceeding.name;
+  const isWebsiteShown = type === EvidenceType.website.name;
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
@@ -100,8 +105,38 @@ const SubmissionView = () => {
     setWebsite(e.target.value);
   };
 
-  const onUploadButton = () => {
+  const onBibtexFileRead = (contents) => {
+    try {
+      const results = BibtexParser.parse(contents);
+      if (!Array.isArray(results) || results.length !== 1) {
+        return;
+      }
 
+      const result = results[0];
+
+      const resultType = Utils.capitalize(result.type);
+      const evidenceType = Enum.findByName(EvidenceType, resultType);
+      if (!(evidenceType instanceof EvidenceTypeEnum)) {
+        throw new Error(`Unsupported type: ${resultType}`);
+      }
+      setTitle(result.TITLE || "");
+      setAuthors(result.AUTHOR || "");
+      setSource(result.JOURNAL || "");
+      setVolume(result.VOLUME || "");
+      setIssue(result.ISSUE || "");
+      setPages(result.PAGES || "");
+      setYear(result.YEAR || "");
+      setDoi(result.DOI || "");
+      setWebsite(result.URL || "");
+      setType(resultType);
+    }
+    catch (e) {
+      // TODO: Display an error dialog?
+      if (e !== null) {
+        alert('Bibtex files only! 🤨');
+        console.log(e);
+      }
+    }
   };
   const onSubmitButton = async () => {
     loaderBloc.show();
@@ -109,7 +144,7 @@ const SubmissionView = () => {
       AUTHOR: authors,
       SOURCE: source,
       TITLE: title,
-      YEAR: year,
+      YEAR: parseInt(year, 10),
       type,
       DOI: doi,
       ISSUE: issue,
@@ -128,7 +163,7 @@ const SubmissionView = () => {
     <Container align="center">
       <Typography variant="h4" align="center">Submit an Article</Typography>
       <Box m={1} />
-      <Button color="primary" variant="contained" onClick={onUploadButton}>Upload Bibtex</Button>
+      <Dropzone accept=".bib" multiple={false} onBibtexFileRead={onBibtexFileRead}/>
       <Box m={1}/>
       <Container>
         <form className={classes.form} noValidate autoComplete="off">
@@ -195,10 +230,13 @@ const SubmissionView = () => {
               <FormControl fullWidth>
                 <InputLabel htmlFor="type-selection">Type*</InputLabel>
                 <Select id="type-selection" fullWidth value={type} onChange={onTypeChange}>
-                  <MenuItem value="Article">Article</MenuItem>
-                  <MenuItem value="Book">Book</MenuItem>
-                  <MenuItem value="Proceeding">Proceeding</MenuItem>
-                  <MenuItem value="Website">Website</MenuItem>
+                  {
+                    Object.values(EvidenceType).map(t => {
+                      return (
+                        <MenuItem key={t.name} value={t.name}>{t.name}</MenuItem>
+                      );
+                    })
+                  }
                 </Select>
               </FormControl>
             </Grid>
