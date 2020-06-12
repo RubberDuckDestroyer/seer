@@ -5,7 +5,8 @@ import {
     Grid,
     MenuItem
 } from "@material-ui/core";
-import { useBindable } from "../local-libs/data/Bindable";
+import { useBindable } from "bindable-bloc";
+
 import FilterJointType from "../libs/enums/FilterJointType";
 
 const ConditionContainer = ({

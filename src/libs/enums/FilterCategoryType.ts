@@ -6,17 +6,17 @@ import IntegrityType from "./IntegrityType";
 import FilterValueType, { FilterValueEnum } from "./FilterValueType";
 
 interface ICategoryEnumParam {
-    dbField: String,
+    dbField: string,
     valueType: FilterValueEnum,
     domain?: Enum[]
 }
 export class FilterCategoryEnum extends Enum {
 
-    dbField: String;
+    dbField: string;
     valueType: FilterValueEnum;
     domain: Enum[] | null;
 
-    constructor(name: String, param: ICategoryEnumParam) {
+    constructor(name: string, param: ICategoryEnumParam) {
         super(name);
         this.dbField = param.dbField;
         this.valueType = param.valueType;

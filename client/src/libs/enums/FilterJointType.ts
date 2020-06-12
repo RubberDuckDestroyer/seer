@@ -3,7 +3,7 @@ import Enum from "./Enum";
 type OperationHandler = (query: any, x: any, y: any) => any;
 
 interface FilterJointParam {
-    name: String,
+    name: string,
     operation: OperationHandler
 }
 

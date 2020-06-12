@@ -4,7 +4,6 @@ import React from "react";
 import { SearchFilterInfo } from "../bloc/SearchBloc";
 import sinon from "sinon"
 import { mount } from "enzyme"
-import AppContext from "../AppContext";
 
 test("Plus Button Exists", () => {
   const { queryByTestId } = render(

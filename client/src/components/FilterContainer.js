@@ -8,8 +8,8 @@ import {
   Grid,
   makeStyles
 } from "@material-ui/core";
+import { useBindable } from "bindable-bloc";
 
-import { useBindable } from "../local-libs/data/Bindable";
 import FilterCategoryType from "../libs/enums/FilterCategoryType";
 
 const useStyles = makeStyles((theme) => ({

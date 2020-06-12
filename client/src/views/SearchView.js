@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import {
-  Box, Button, makeStyles, Container
+  Box, Button, makeStyles, Container, Typography
 } from "@material-ui/core";
+import { useBindable } from "bindable-bloc";
 
 import FilterContainer from "../components/FilterContainer";
 import DateContainer from "../components/DateContainer";
@@ -11,7 +12,6 @@ import SearchResultBloc from "../bloc/SearchResultBloc";
 import LoaderBloc from "../bloc/LoaderBloc";
 import SearchBloc from "../bloc/SearchBloc";
 import ConditionContainer from "../components/ConditionContainer";
-import { useBindable } from "../local-libs/data/Bindable";
 
 const useStyle = makeStyles(() => ({
   searchContainer: {
@@ -50,6 +50,8 @@ const SearchView = () => {
 
   return (
     <Container>
+      <Typography variant="h4" align="center">Search articles</Typography>
+      <Box m={1} />
       {
         searchFilters.map((f, index) => {
           const getFilterContainer = () => (

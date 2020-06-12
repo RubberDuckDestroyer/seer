@@ -10,7 +10,7 @@ export class FilterConditionEnum extends Enum {
     queryTargetBuilder: (value: any) => any = (v) => v;
 
 
-    constructor(name: String, param?: IFilterConditionParam) {
+    constructor(name: string, param?: IFilterConditionParam) {
         super(name);
         if (param) {
             if(param.queryTargetBuilder !== undefined)

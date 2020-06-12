@@ -1,21 +1,20 @@
-import BaseBloc from "../local-libs/bloc/BaseBloc";
 import FilterCategoryType from "../libs/enums/FilterCategoryType";
 import ColumnType from "../libs/enums/ColumnType";
 import Enum from "../libs/enums/Enum";
-import Bindable from "../local-libs/data/Bindable";
 import { FilterCategoryEnum } from "../libs/enums/FilterCategoryType";
 import { ColumnEnum } from '../libs/enums/ColumnType';
 import DateUtils from "../libs/DateUtils";
 import { FilterJointEnum } from '../libs/enums/FilterJointType';
 import FilterJointType from '../libs/enums/FilterJointType';
 import Utils from "../libs/Utils";
+import { Bindable, BaseBloc } from 'bindable-bloc';
 
 export class SearchFilterInfo {
 
-    key: String;
+    key: string;
     category: Bindable<FilterCategoryEnum>;
     condition: Bindable<Enum>;
-    value: Bindable<String>;
+    value: Bindable<string>;
 
     constructor() {
         this.key = Utils.createUUID();
@@ -23,7 +22,7 @@ export class SearchFilterInfo {
         const defaultCategory = FilterCategoryType.method;
         this.category = new Bindable<FilterCategoryEnum>(defaultCategory);
         this.condition = new Bindable<Enum>(defaultCategory.valueType.conditions[0]);
-        this.value = new Bindable<String>("");
+        this.value = new Bindable<string>("");
 
         this.category.subscribe((v: FilterCategoryEnum) => {
             if (v.valueType.isDropdown && v.domain !== null)
@@ -38,7 +37,7 @@ export class SearchFilterInfo {
 
 export class SearchJointInfo {
 
-    key: String;
+    key: string;
     joint: Bindable<FilterJointEnum>;
 
     constructor() {
@@ -119,8 +118,8 @@ export class SearchColumnInfo {
 
 export default class SearchBloc extends BaseBloc {
 
-    minDate: Bindable<String>;
-    maxDate: Bindable<String>;
+    minDate: Bindable<string>;
+    maxDate: Bindable<string>;
     filterDate: Bindable<boolean>;
     filters: Bindable<SearchFilterInfo[]>;
     joints: Bindable<SearchJointInfo[]>;
@@ -129,8 +128,8 @@ export default class SearchBloc extends BaseBloc {
 
     constructor() {
         super();
-        this.minDate = new Bindable<String>(DateUtils.toUTC(new Date(1900, 1, 1)).toString());
-        this.maxDate = new Bindable<String>(DateUtils.toUTC(new Date()).toString());
+        this.minDate = new Bindable<string>(DateUtils.toUTC(new Date(1900, 1, 1)).toString());
+        this.maxDate = new Bindable<string>(DateUtils.toUTC(new Date()).toString());
         this.filterDate = new Bindable<boolean>(true);
         this.filters = new Bindable<SearchFilterInfo[]>(new Array<SearchFilterInfo>());
         this.joints = new Bindable<SearchJointInfo[]>(new Array<SearchJointInfo>());
