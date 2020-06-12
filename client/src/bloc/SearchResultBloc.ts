@@ -1,11 +1,10 @@
-import Bindable from "../local-libs/data/Bindable";
 import ArticleInfo from "../libs/types/ArticleInfo";
 import SearchRequest from "../libs/api/SearchRequest";
 import SearchBloc from "./SearchBloc";
 import DateUtils from "../libs/DateUtils";
-import BaseBloc from '../local-libs/bloc/BaseBloc';
 import { ISearchRequestParam } from '../libs/api/SearchRequest';
 import StatusType from '../libs/enums/StatusType';
+import { BaseBloc, Bindable } from 'bindable-bloc';
 
 export default class SearchResultBloc extends BaseBloc {
 
@@ -13,7 +12,7 @@ export default class SearchResultBloc extends BaseBloc {
     results: Bindable<ArticleInfo[]>;
 
     isSuccess: Bindable<boolean>;
-    errorMessage: Bindable<String>;
+    errorMessage: Bindable<string>;
 
 
     constructor(searchBloc: SearchBloc) {
@@ -21,7 +20,7 @@ export default class SearchResultBloc extends BaseBloc {
         this.searchBloc = searchBloc;
         this.results = new Bindable<ArticleInfo[]>(new Array<ArticleInfo>());
         this.isSuccess = new Bindable<boolean>(true);
-        this.errorMessage = new Bindable<String>("");
+        this.errorMessage = new Bindable<string>("");
     }
 
     clearResults() {

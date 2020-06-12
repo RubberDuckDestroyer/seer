@@ -11,10 +11,10 @@ import {
   FormControlLabel
 } from "@material-ui/core";
 import moment from "moment";
+import { useBindable } from "bindable-bloc";
 
 import AppContext from "../AppContext";
 import SearchBloc from "../bloc/SearchBloc";
-import { useBindable } from "../local-libs/data/Bindable";
 import DateUtils from "../libs/DateUtils";
 
 const useStyles = makeStyles((theme) => ({

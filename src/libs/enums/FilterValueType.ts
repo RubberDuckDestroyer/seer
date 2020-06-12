@@ -12,7 +12,7 @@ export class FilterValueEnum extends Enum {
     isDropdown: boolean;
     isNumeric: boolean;
 
-    constructor(name: String, param: ICategoryDataParam) {
+    constructor(name: string, param: ICategoryDataParam) {
         super(name);
         this.conditions = param.conditions;
         this.isDropdown = param.isDropdown || false;

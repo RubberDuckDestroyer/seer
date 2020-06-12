@@ -1,5 +1,4 @@
-import BaseBloc from '../local-libs/bloc/BaseBloc';
-import Bindable from '../local-libs/data/Bindable';
+import { BaseBloc, Bindable } from "bindable-bloc";
 
 export default class LoaderBloc extends BaseBloc {
 

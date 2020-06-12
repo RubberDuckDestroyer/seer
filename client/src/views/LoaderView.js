@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import {
     makeStyles, Typography
 } from "@material-ui/core";
+import { useBindable } from "bindable-bloc";
 
 import AppContext from "../AppContext";
 import LoaderBloc from "../bloc/LoaderBloc";
-import { useBindable } from "../local-libs/data/Bindable";
 
 const useStyle = makeStyles(() => ({
     container: {
