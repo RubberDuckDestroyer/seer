@@ -20,7 +20,7 @@ const Dropzone = ({
 
       reader.readAsText(file);
     });
-  }, []);
+  }, [onBibtexFileRead]);
 
   const {
     getRootProps, getInputProps, isDragActive
