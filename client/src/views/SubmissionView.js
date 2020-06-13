@@ -131,9 +131,8 @@ const SubmissionView = () => {
       setType(resultType);
     }
     catch (e) {
-      // TODO: Display an error dialog?
       if (e !== null) {
-        alert('Bibtex files only! 🤨');
+        alert('Please upload a valid Bibtex file.');
         console.log(e);
       }
     }
