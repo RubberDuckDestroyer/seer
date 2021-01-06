@@ -28,7 +28,7 @@
   "dependencies": {
     "@babel/runtime": "^7.9.6",
     "@types/node": "^14.0.5",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "bibtex-parse": "^2.1.0",
     "bootstrap": "^4.4.1",
