@@ -13,7 +13,7 @@
     "bindable-bloc": "^1.1.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "moment": "^2.18.1",
+    "moment": "^2.29.2",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
