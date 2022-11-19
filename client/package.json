@@ -21,7 +21,7 @@
     "react-dropzone": "^11.0.1",
     "react-moment": "^0.9.7",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.3.0",
+    "react-scripts": "5.0.1",
     "sinon": "^9.0.2",
     "uuid": "^3.3.3"
   },
